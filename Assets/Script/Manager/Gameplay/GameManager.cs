@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace Com.oHMysTArs
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class GameManager : Singleton<GameManager>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            transform.parent = null;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 }

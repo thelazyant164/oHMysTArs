@@ -2,17 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Point : MonoBehaviour
+namespace Com.oHMysTArs.Grid
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class Point : MonoBehaviour
     {
-        
-    }
+        [Header("Dot configurations")]
+        [SerializeField]
+        private Sprite star;
+        [SerializeField]
+        private Sprite starSelected;
+        [Space]
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("State")]
+        [SerializeField]
+        private bool active;
+
+        private int column;
+        private int row;
+        private SpriteRenderer spriteRenderer;
+
+        public void Setup(int column, int row)
+        {
+            this.column = column;
+            this.row = row;
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
+        public void Select()
+        {
+            active = true;
+            spriteRenderer.sprite = starSelected;
+        }
+
+        public void Deselect()
+        {
+            active = false;
+            spriteRenderer.sprite = star;
+        }
     }
 }

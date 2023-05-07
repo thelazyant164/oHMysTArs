@@ -2,17 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+namespace Com.oHMysTArs.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public sealed class UIManager : Singleton<UIManager>
     {
-        
-    }
+        public AudioSource UIAudio { get; private set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            transform.parent = null;
+            DontDestroyOnLoad(this.gameObject);
+
+            UIAudio = GetComponentInChildren<AudioSource>();
+        }
     }
 }
