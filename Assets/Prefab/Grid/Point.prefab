@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9047818020853145658}
   - component: {fileID: 2120235541734040177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DotContact
   m_TagString: Untagged
   m_Icon: {fileID: 0}

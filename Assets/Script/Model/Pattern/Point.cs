@@ -16,6 +16,7 @@ namespace Com.oHMysTArs.Grid
         [Header("State")]
         [SerializeField]
         private bool active;
+        public bool Active => active;
 
         private int column;
         private int row;
