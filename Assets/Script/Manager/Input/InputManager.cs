@@ -10,9 +10,8 @@ namespace Com.oHMysTArs.Input
     {
         public PointSelectionManager PointSelectionManager { get; private set; }
         public PointSelectionCache PointSelectionCache { get; private set; }
+        public bool IsMouseDown { get; private set; }
 
-        private event EventHandler _onMouseDown;
-        private event EventHandler _onMouseUp;
         public event EventHandler OnMouseDown;
         public event EventHandler OnMouseUp;
 
@@ -29,42 +28,26 @@ namespace Com.oHMysTArs.Input
 
             PointSelectionManager = GetComponentInChildren<PointSelectionManager>();
             PointSelectionCache = GetComponentInChildren<PointSelectionCache>();
-            _onMouseDown += OnMouseDownCallback;
         }
 
         private void Update()
         {
-            if (!IsLMBDown())
+            if (IsLMBDown())
             {
-                _onMouseUp?.Invoke(this, EventArgs.Empty);
+                IsMouseDown = true;
+                OnMouseDown?.Invoke(this, EventArgs.Empty);
             }
-            else
+            if (IsLMBUp())
             {
-                _onMouseDown?.Invoke(this, EventArgs.Empty);
+                IsMouseDown = false;
+                OnMouseUp?.Invoke(this, EventArgs.Empty);
             }
         }
 
-        public bool IsLMBDown() => UnityEngine.Input.GetMouseButtonDown(0);
+        private bool IsLMBDown() => UnityEngine.Input.GetMouseButtonDown(0);
 
-        public Vector2 GetMouseScreenPosition()
-        {
-            return UnityEngine.Input.mousePosition;
-        }
+        private bool IsLMBUp() => UnityEngine.Input.GetMouseButtonUp(0);
 
-        private void OnMouseDownCallback(object sender, EventArgs e)
-        {
-            OnMouseDown?.Invoke(this, EventArgs.Empty);
-            _onMouseDown -= OnMouseDownCallback;
-            _onMouseUp -= OnMouseUpCallback;
-            _onMouseUp += OnMouseUpCallback;
-        }
-
-        private void OnMouseUpCallback(object sender, EventArgs e)
-        {
-            OnMouseUp?.Invoke(this, EventArgs.Empty);
-            _onMouseDown -= OnMouseDownCallback;
-            _onMouseDown += OnMouseDownCallback;
-            _onMouseUp -= OnMouseUpCallback;
-        }
+        public Vector2 GetMouseScreenPosition() => UnityEngine.Input.mousePosition;
     }
 }

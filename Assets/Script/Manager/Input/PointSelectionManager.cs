@@ -13,6 +13,7 @@ namespace Com.oHMysTArs.Input
         private LayerMask pointLayer;
 
         private InputManager inputManager;
+        public event EventHandler OnStopHover;
         public event EventHandler<Point> OnHover;
         public event EventHandler<Point> OnSelect;
 
@@ -23,8 +24,9 @@ namespace Com.oHMysTArs.Input
 
         public void Update()
         {
+            OnStopHover?.Invoke(this, EventArgs.Empty);
             if (!TrySelectPoint(out Point point) || point.Active) return;
-            if (inputManager.IsLMBDown())
+            if (inputManager.IsMouseDown)
             {
                 OnSelect?.Invoke(this, point);
             }

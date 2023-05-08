@@ -1,6 +1,9 @@
+using Com.oHMysTArs.Input;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Com.oHMysTArs.Grid.GridSystem;
 
 namespace Com.oHMysTArs.Grid
 {
@@ -18,27 +21,58 @@ namespace Com.oHMysTArs.Grid
         private bool active;
         public bool Active => active;
 
-        private int column;
-        private int row;
+        public Coordinate Coordinate { get; private set; }
         private SpriteRenderer spriteRenderer;
+        private InputManager inputManager;
+        private PointSelectionManager selectionManager;
 
-        public void Setup(int column, int row)
+        private void Awake()
         {
-            this.column = column;
-            this.row = row;
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
 
-        public void Select()
+        private void Start()
         {
-            active = true;
-            spriteRenderer.sprite = starSelected;
+            inputManager = InputManager.Instance;
+            selectionManager = inputManager.PointSelectionManager;
+            inputManager.OnMouseUp += (object sender, EventArgs e) => Deactivate();
+            selectionManager.OnSelect += (object sender, Point point) =>
+            {
+                if (this == point) Activate();
+            };
+            selectionManager.OnHover += (object sender, Point point) =>
+            {
+                if (Active || this != point) return;
+                Select();
+            };
+            selectionManager.OnStopHover += (object sender, EventArgs e) =>
+            {
+                if (Active) return;
+                Deselect();
+            };
         }
 
-        public void Deselect()
+        public void Setup(GridSystem.Coordinate coordinate)
+        {
+            this.Coordinate = coordinate;
+        }
+
+        public void Activate()
+        {
+            active = true;
+            Select();
+        }
+
+        public void Deactivate()
         {
             active = false;
-            spriteRenderer.sprite = star;
+            Deselect();
         }
+
+        public void Select() => spriteRenderer.sprite = starSelected;
+
+        public void Deselect() => spriteRenderer.sprite = star;
+
+        public override string ToString() => $"Point {Coordinate.Column}:{Coordinate.Row}";
     }
 }

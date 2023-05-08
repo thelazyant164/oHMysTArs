@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,23 @@ namespace Com.oHMysTArs.Grid
 {
     public sealed class GridSystem : MonoBehaviour
     {
+        [Serializable]
+        public struct Coordinate
+        {
+            public int Column;
+            public int Row;
+
+            public Coordinate(int column, int row)
+            {
+                this.Column = column;
+                this.Row = row;
+            }
+
+            public static bool Match(Coordinate first, Coordinate second) 
+                => first.Column == second.Column 
+                   && first.Row == second.Row;
+        }
+
         [Header("Grid configurations")]
         [SerializeField]
         private int columnCount = 3;
@@ -35,7 +53,7 @@ namespace Com.oHMysTArs.Grid
                     GameObject newPoint = Instantiate(pointPrefab, transform);
                     Point point = newPoint.GetComponent<Point>();
                     point.transform.position = rootPoint.position + new Vector3(j * pointDistance, i * pointDistance);
-                    point.Setup(i, j);
+                    point.Setup(new Coordinate(i, j));
                     points.Add(point);
                 }
             }
