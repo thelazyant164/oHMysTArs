@@ -28,7 +28,7 @@ namespace Com.oHMysTArs.Pattern
                 Coordinate[] predefinedOrder = new Coordinate[fields.Length - 1];
                 for (int i = 1; i < fields.Length; i++) 
                 {
-                    predefinedOrder[i] = ParseCoordinate(fields[i]);
+                    predefinedOrder[i - 1] = ParseCoordinate(fields[i]);
                 }
 
                 Pattern newPattern = Pattern.Init(fields[0], predefinedOrder);

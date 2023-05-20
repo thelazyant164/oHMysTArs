@@ -76,8 +76,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1f6770f2cf667b4da784290ead6e5c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columnCount: 3
-  rowCount: 3
+  columnCount: 5
+  rowCount: 5
   pointDistance: 5
   rootPoint: {fileID: 5893940818039151230}
   pointPrefab: {fileID: 5811894243414813019, guid: 2d8cebfe0a40bce4a9a9356e5147de9c, type: 3}
