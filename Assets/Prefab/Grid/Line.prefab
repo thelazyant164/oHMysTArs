@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8698285334221157082}
   - component: {fileID: 9210251717790175329}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.1785717
+        value: 0.15032059
         inSlope: 0
         outSlope: 0
         tangentMode: 0

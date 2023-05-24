@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 namespace Com.oHMysTArs.Input
 {
     public sealed class InputManager : Singleton<InputManager>
     {
+        [SerializeField]
+        private GraphicRaycaster raycaster;
         public PointSelectionManager PointSelectionManager { get; private set; }
         public PointSelectionCache PointSelectionCache { get; private set; }
         public bool IsMouseDown { get; private set; }
@@ -49,5 +54,16 @@ namespace Com.oHMysTArs.Input
         private bool IsLMBUp() => UnityEngine.Input.GetMouseButtonUp(0);
 
         public Vector2 GetMouseScreenPosition() => UnityEngine.Input.mousePosition;
+
+        public bool TryGetHoverUIElement(out GameObject hovering)
+        {
+            hovering = null;
+            List<RaycastResult> result = new();
+            PointerEventData pointer = new PointerEventData(EventSystem.current);
+            pointer.position = GetMouseScreenPosition();
+            raycaster.Raycast(pointer, result);
+            if (result.Any()) hovering = result.First().gameObject;
+            return hovering != null;
+        }
     }
 }

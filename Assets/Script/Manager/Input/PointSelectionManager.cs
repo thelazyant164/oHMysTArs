@@ -2,16 +2,14 @@ using Com.oHMysTArs.Grid;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Com.oHMysTArs.Input
 {
     public sealed class PointSelectionManager : MonoBehaviour
     {
-        [Header("Raycast configurations")]
-        [SerializeField]
-        private LayerMask pointLayer;
-
         private InputManager inputManager;
         public event EventHandler OnStopHover;
         public event EventHandler<Point> OnHover;
@@ -38,9 +36,11 @@ namespace Com.oHMysTArs.Input
 
         private bool TrySelectPoint(out Point point)
         {
-            Ray ray = Camera.main.ScreenPointToRay(inputManager.GetMouseScreenPosition());
-            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, pointLayer);
-            point = hit.collider?.GetComponentInParent<Point>();
+            point = null;
+            if (inputManager.TryGetHoverUIElement(out GameObject hoveringPoint))
+            {
+                point = hoveringPoint.GetComponentInParent<Point>();
+            }
             return point != null;
         }
     }

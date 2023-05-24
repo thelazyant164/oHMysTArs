@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Com.oHMysTArs.Grid.GridSystem;
 
 namespace Com.oHMysTArs.Grid
@@ -22,13 +23,13 @@ namespace Com.oHMysTArs.Grid
         public bool Active => active;
 
         public Coordinate Coordinate { get; private set; }
-        private SpriteRenderer spriteRenderer;
+        private Image image;
         private InputManager inputManager;
         private PointSelectionManager selectionManager;
 
         private void Awake()
         {
-            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            image = GetComponentInChildren<Image>();
         }
 
         private void Start()
@@ -69,9 +70,9 @@ namespace Com.oHMysTArs.Grid
             Deselect();
         }
 
-        public void Select() => spriteRenderer.sprite = starSelected;
+        public void Select() => image.sprite = starSelected;
 
-        public void Deselect() => spriteRenderer.sprite = star;
+        public void Deselect() => image.sprite = star;
 
         public override string ToString() => $"Point {Coordinate.Column}:{Coordinate.Row}";
     }
