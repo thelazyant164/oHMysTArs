@@ -32,7 +32,7 @@ namespace Com.oHMysTArs.Queue
 
         private void Progress(object sender, Spaceship.Spaceship spaceship)
         {
-            spaceship.MoveTo(spaceship.Succeed ? succeedPosition.position : failedPosition.position);
+            //spaceship.MoveTo(spaceship.Succeed ? succeedPosition.position : failedPosition.position);
             int order = 0;
             foreach (Spaceship.Spaceship waitingSpaceship in spaceshipManager.WaitingQueue)
             {

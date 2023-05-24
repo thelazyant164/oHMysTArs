@@ -28,6 +28,7 @@ namespace Com.oHMysTArs.Input
         private readonly List<Segment> drawn = new();
 
         private InputManager inputManager;
+        public event EventHandler<Point> OnSelectNew;
         private PointSelectionManager selectionManager;
         public event EventHandler<Segment> OnDrawSegment;
         public event EventHandler<List<Point>> OnDrawPattern;
@@ -51,6 +52,7 @@ namespace Com.oHMysTArs.Input
             if (selected.Count == 0)
             {
                 selected.Add(point);
+                OnSelectNew?.Invoke(this, point);
                 return;
             }
             Point last = selected.Last();
@@ -61,6 +63,7 @@ namespace Com.oHMysTArs.Input
                 OnDrawSegment?.Invoke(sender, newSegment);
             }
             selected.Add(point);
+            OnSelectNew?.Invoke(this, point);
         }
     }
 }

@@ -53,6 +53,8 @@ namespace Com.oHMysTArs.Input
 
         private bool IsLMBUp() => UnityEngine.Input.GetMouseButtonUp(0);
 
+        public Vector3 GetMouseWorldPosition() => Camera.main.ScreenToWorldPoint(GetMouseScreenPosition());
+
         public Vector2 GetMouseScreenPosition() => UnityEngine.Input.mousePosition;
 
         public bool TryGetHoverUIElement(out GameObject hovering)

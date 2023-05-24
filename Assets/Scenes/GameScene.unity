@@ -1135,7 +1135,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3793574959089757141, guid: 348eb25242a627e4789a32b7d31f423e, type: 3}
       propertyPath: pointDistance
-      value: 2
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5546838371755017521, guid: 348eb25242a627e4789a32b7d31f423e, type: 3}
       propertyPath: m_RootOrder

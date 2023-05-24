@@ -33,7 +33,7 @@ namespace Com.oHMysTArs.Grid
 
         [Header("Grid layout")]
         [SerializeField]
-        private int pointDistance = 5;
+        private float pointDistance = 5f;
         [SerializeField]
         private Transform rootPoint;
         [Space]
