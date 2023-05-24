@@ -28,8 +28,6 @@ namespace Com.oHMysTArs.Input
                 return;
             }
             Instance = this;
-            transform.parent = null;
-            DontDestroyOnLoad(this.gameObject);
 
             PointSelectionManager = GetComponentInChildren<PointSelectionManager>();
             PointSelectionCache = GetComponentInChildren<PointSelectionCache>();

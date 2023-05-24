@@ -25,6 +25,7 @@ namespace Com.oHMysTArs.Spaceship
         public List<Spaceship> Done => done;
         public Spaceship Current => waitingQueue.FirstOrDefault();
         private LevelManager levelManager;
+        public event EventHandler<Spaceship> OnDoneServing;
         public event EventHandler<Spaceship> OnActiveSpaceshipChange;
         public event EventHandler OnEndQueue;
 
@@ -41,6 +42,7 @@ namespace Com.oHMysTArs.Spaceship
             {
                 waitingQueue.RemoveAt(0);
                 done.Add(last);
+                OnDoneServing?.Invoke(this, last);
             }
             if (Current != null)
             {
@@ -60,7 +62,7 @@ namespace Com.oHMysTArs.Spaceship
             foreach (SpaceshipSO so in spaceships) 
             {
                 Spaceship newSpaceship = GameObject.Instantiate(spaceshipPrefab, queue.transform).GetComponent<Spaceship>();
-                newSpaceship.Init(so, queue.GetPosition(i));
+                newSpaceship.Init(so, queue.GetPosition(i), this);
                 waitingQueue.Add(newSpaceship);
                 i++;
             }

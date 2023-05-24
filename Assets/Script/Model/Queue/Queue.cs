@@ -10,29 +10,35 @@ namespace Com.oHMysTArs.Queue
     {
         [Header("Queue layout")]
         [SerializeField]
-        private Transform succeedPosition;
-        [SerializeField]
         private Transform servingPosition;
         [SerializeField]
-        private Transform failedPosition;
-        [SerializeField]
-        private int horizontalQueueGap;
-        [SerializeField]
-        private int verticalQueueGap;
-        private Vector2 offset => new Vector2(horizontalQueueGap, - verticalQueueGap);
+        private Transform lastInLine;
+        private Vector2 offset => lastInLine.position - servingPosition.position;
         private SpaceshipManager spaceshipManager;
 
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
+            spaceshipManager.OnDoneServing += SendAway;
             spaceshipManager.OnActiveSpaceshipChange += Progress;
             spaceshipManager.OnEndQueue += (object sender, EventArgs e) 
                 => spaceshipManager.OnActiveSpaceshipChange -= Progress;
         }
 
+        private void SendAway(object sender, Spaceship.Spaceship spaceship)
+        {
+            if (spaceship.Succeed)
+            {
+                spaceship.PlaySucceedAnimation();
+            }
+            else
+            {
+                spaceship.PlayFailAnimation();
+            }
+        }
+
         private void Progress(object sender, Spaceship.Spaceship spaceship)
         {
-            //spaceship.MoveTo(spaceship.Succeed ? succeedPosition.position : failedPosition.position);
             int order = 0;
             foreach (Spaceship.Spaceship waitingSpaceship in spaceshipManager.WaitingQueue)
             {

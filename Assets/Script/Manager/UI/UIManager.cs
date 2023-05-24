@@ -16,8 +16,6 @@ namespace Com.oHMysTArs.UI
                 return;
             }
             Instance = this;
-            transform.parent = null;
-            DontDestroyOnLoad(this.gameObject);
 
             UIAudio = GetComponentInChildren<AudioSource>();
         }

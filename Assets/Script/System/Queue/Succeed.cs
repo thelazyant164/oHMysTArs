@@ -6,13 +6,11 @@ namespace Com.oHMysTArs.Queue
 {
     public sealed class Succeed : QueueState
     {
-        public Succeed(QueueSystem queueSystem) : base(queueSystem) 
-        {
-            queueSystem.Spaceship.PlaySucceedAnimation();
-        }
+        public Succeed(QueueSystem queueSystem) : base(queueSystem) { }
 
         public override IEnumerator Start()
         {
+            queue.Next();
             yield break;
         }
 

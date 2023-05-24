@@ -24,8 +24,6 @@ namespace Com.oHMysTArs
                 return;
             }
             Instance = this;
-            transform.parent = null;
-            DontDestroyOnLoad(this.gameObject);
 
             DrawHistory = GetComponentInChildren<DrawHistory>();
             LevelManager = GetComponentInChildren<LevelManager>();
