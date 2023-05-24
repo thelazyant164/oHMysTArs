@@ -9,10 +9,18 @@ namespace Com.oHMysTArs.Spaceship
 {
     public sealed class SpaceshipManager : MonoBehaviour
     {
+        [Header("Spaceship")]
+        [SerializeField]
+        private Queue.Queue queue;
         [SerializeField]
         private GameObject spaceshipPrefab;
+        [Space]
+
+        [Header("State")]
         [SerializeField]
         private List<Spaceship> waitingQueue;
+        public List<Spaceship> WaitingQueue => waitingQueue;
+        [SerializeField]
         private List<Spaceship> done;
         public List<Spaceship> Done => done;
         public Spaceship Current => waitingQueue.FirstOrDefault();
@@ -20,7 +28,7 @@ namespace Com.oHMysTArs.Spaceship
         public event EventHandler<Spaceship> OnActiveSpaceshipChange;
         public event EventHandler OnEndQueue;
 
-        private void Start()
+        public void Init()
         {
             levelManager = GameManager.Instance.LevelManager;
             levelManager.OnStart += (object sender, Level.Level level) => InitQueue(level.Queue);
@@ -48,11 +56,13 @@ namespace Com.oHMysTArs.Spaceship
         {
             waitingQueue.Clear();
             done.Clear();
+            int i = 0;
             foreach (SpaceshipSO so in spaceships) 
             {
-                Spaceship newSpaceship = GameObject.Instantiate(spaceshipPrefab, transform).GetComponent<Spaceship>();
-                newSpaceship.Init(so);
+                Spaceship newSpaceship = GameObject.Instantiate(spaceshipPrefab, queue.transform).GetComponent<Spaceship>();
+                newSpaceship.Init(so, queue.GetPosition(i));
                 waitingQueue.Add(newSpaceship);
+                i++;
             }
             OnActiveSpaceshipChange?.Invoke(this, Current);
         }

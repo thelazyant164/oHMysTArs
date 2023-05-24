@@ -8,12 +8,14 @@ using System.Reflection;
 using Com.oHMysTArs.Grid;
 using System.Linq;
 using static Com.oHMysTArs.Grid.GridSystem;
+using System.IO;
 
 namespace Com.oHMysTArs.Spaceship
 {
     public sealed class SpaceshipLoader : BaseGenerator<SpaceshipSO>
     {
         private readonly List<Pattern.Pattern> patterns = CsvToScriptableObject.Patterns;
+        private readonly List<Texture2D> textures = Resources.LoadAll<Texture2D>("Spaceship/Texture").ToList();
 
         public SpaceshipLoader() : base("SpaceshipSO", "Spaceship_data.csv") { }
 
@@ -29,7 +31,8 @@ namespace Com.oHMysTArs.Spaceship
                 if (fields.Length == 0) break;
 
                 Pattern.Pattern pattern = patterns.Find(pattern => pattern.name == fields[1]);
-                SpaceshipSO newSpaceship = SpaceshipSO.Init(fields[0], pattern, CsvToScriptableObject.ParseInt(fields[2]) == 1);
+                Texture2D texture = textures.Find(texture => texture.name == fields[1]);
+                SpaceshipSO newSpaceship = SpaceshipSO.Init(fields[0], pattern, CsvToScriptableObject.ParseInt(fields[2]) == 1, texture);
                 items.Add(newSpaceship);
             }
             return items;

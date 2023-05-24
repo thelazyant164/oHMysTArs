@@ -29,6 +29,7 @@ namespace Com.oHMysTArs.Queue
         public override void Terminate()
         {
             queue.Current.Record(remainingTime);
+            Debug.Log("Next");
             queue.Next();
         }
     }

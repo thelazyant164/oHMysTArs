@@ -30,10 +30,12 @@ namespace Com.oHMysTArs
             DrawHistory = GetComponentInChildren<DrawHistory>();
             LevelManager = GetComponentInChildren<LevelManager>();
             SpaceshipManager = GetComponentInChildren<SpaceshipManager>();
+            SpaceshipManager.Init();
         }
 
         private void Start()
         {
+            DrawHistory.Init();
             LevelManager.PlayLevel(levelName);
             LevelManager.OnFinish += ShowLevelAssessment;
         }

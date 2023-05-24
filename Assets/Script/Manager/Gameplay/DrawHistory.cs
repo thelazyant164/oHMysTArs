@@ -17,10 +17,11 @@ namespace Com.oHMysTArs.Pattern
         private SpaceshipManager spaceshipManager;
         public event EventHandler<bool> OnDraw;
 
-        private void Start()
+        public void Init()
         {
             cache = InputManager.Instance.PointSelectionCache;
             cache.OnDrawPattern += RecordPattern;
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
             spaceshipManager.OnActiveSpaceshipChange += ActiveSpaceshipChange;
             spaceshipManager.OnEndQueue += EndQueue;
         }

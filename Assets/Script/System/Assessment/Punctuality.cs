@@ -13,7 +13,7 @@ namespace Com.oHMysTArs.Level
             float sum = 0;
             foreach (Spaceship.Spaceship spaceship in spaceships)
             {
-                sum += spaceship.Time;
+                sum += spaceship.ServeTime;
             }
             float avg = sum / spaceships.Count;
             switch (avg)
