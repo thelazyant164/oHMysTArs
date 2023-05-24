@@ -6,7 +6,10 @@ namespace Com.oHMysTArs.Queue
 {
     public sealed class Failed : QueueState
     {
-        public Failed(QueueSystem queueSystem) : base(queueSystem) { }
+        public Failed(QueueSystem queueSystem) : base(queueSystem) 
+        {
+            queueSystem.Spaceship.PlayFailAnimation();
+        }
 
         public override IEnumerator Start()
         {
