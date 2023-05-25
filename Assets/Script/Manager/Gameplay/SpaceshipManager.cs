@@ -33,6 +33,7 @@ namespace Com.oHMysTArs.Spaceship
         {
             levelManager = GameManager.Instance.LevelManager;
             levelManager.OnStart += (object sender, Level.Level level) => InitQueue(level.Queue);
+            levelManager.OnFinish += (object sender, Level.Level level) => StopQueue();
         }
 
         public void Next()
@@ -67,6 +68,12 @@ namespace Com.oHMysTArs.Spaceship
                 i++;
             }
             OnActiveSpaceshipChange?.Invoke(this, Current);
+        }
+
+        private void StopQueue()
+        {
+            if (Current == null) return;
+            Current.StopServing();
         }
     }
 }

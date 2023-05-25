@@ -6,6 +6,7 @@ namespace Com.oHMysTArs.UI
 {
     public sealed class UIManager : Singleton<UIManager>
     {
+        public Timeline Timeline { get; private set; }
         public AudioSource UIAudio { get; private set; }
 
         private void Awake()
@@ -17,6 +18,7 @@ namespace Com.oHMysTArs.UI
             }
             Instance = this;
 
+            Timeline = GetComponentInChildren<Timeline>();
             UIAudio = GetComponentInChildren<AudioSource>();
         }
     }

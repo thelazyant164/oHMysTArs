@@ -94,5 +94,11 @@ namespace Com.oHMysTArs.Spaceship
             }
             image.enabled = false;
         }
+
+        public void StopServing() 
+        { 
+            state.SetState(new Waiting(state)); 
+            ServeTime = 0;
+        }
     }
 }

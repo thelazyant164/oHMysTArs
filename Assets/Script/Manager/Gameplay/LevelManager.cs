@@ -1,4 +1,5 @@
 using Com.oHMysTArs.Spaceship;
+using Com.oHMysTArs.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Com.oHMysTArs.Level
         private Level current;
         private List<Level> levels;
         private SpaceshipManager spaceshipManager;
+        private Timeline timeline;
         public event EventHandler<Level> OnStart;
         public event EventHandler<Level> OnFinish;
 
@@ -22,8 +24,10 @@ namespace Com.oHMysTArs.Level
 
         void Start()
         {
+            timeline = UIManager.Instance.Timeline;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             spaceshipManager.OnEndQueue += EndLevel;
+            timeline.OnTimerEnd += EndLevel;
         }
 
         private void EndLevel(object sender, EventArgs e)
