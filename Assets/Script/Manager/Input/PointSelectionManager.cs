@@ -37,7 +37,7 @@ namespace Com.oHMysTArs.Input
         private bool TrySelectPoint(out Point point)
         {
             point = null;
-            if (inputManager.TryGetHoverUIElement(out GameObject hoveringPoint))
+            if (inputManager.TryGetHoverElement(false, out GameObject hoveringPoint))
             {
                 point = hoveringPoint.GetComponentInParent<Point>();
             }

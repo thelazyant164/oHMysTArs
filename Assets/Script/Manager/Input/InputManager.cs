@@ -12,6 +12,8 @@ namespace Com.oHMysTArs.Input
     public sealed class InputManager : Singleton<InputManager>
     {
         [SerializeField]
+        private GraphicRaycaster UIRaycaster;
+        [SerializeField]
         private GraphicRaycaster raycaster;
         public PointSelectionManager PointSelectionManager { get; private set; }
         public PointSelectionCache PointSelectionCache { get; private set; }
@@ -55,12 +57,13 @@ namespace Com.oHMysTArs.Input
 
         public Vector2 GetMouseScreenPosition() => UnityEngine.Input.mousePosition;
 
-        public bool TryGetHoverUIElement(out GameObject hovering)
+        public bool TryGetHoverElement(bool UI, out GameObject hovering)
         {
             hovering = null;
             List<RaycastResult> result = new();
             PointerEventData pointer = new PointerEventData(EventSystem.current);
             pointer.position = GetMouseScreenPosition();
+            GraphicRaycaster raycaster = UI ? UIRaycaster : this.raycaster;
             raycaster.Raycast(pointer, result);
             if (result.Any()) hovering = result.First().gameObject;
             return hovering != null;
