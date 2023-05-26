@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Com.oHMysTArs.Level
+namespace Com.oHMysTArs.Assessment
 {
     public readonly struct Profitability
     {

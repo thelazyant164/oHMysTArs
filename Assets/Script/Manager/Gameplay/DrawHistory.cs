@@ -36,6 +36,7 @@ namespace Com.oHMysTArs.Pattern
 
         private void EndQueue(object sender, EventArgs e)
         {
+            spaceshipManager.OnEndQueue -= EndQueue;
             history.Clear();
             OnDraw -= current.Draw;
             current = null;

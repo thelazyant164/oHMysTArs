@@ -1,4 +1,5 @@
 using Com.oHMysTArs.Level;
+using Com.oHMysTArs.Assessment;
 using Com.oHMysTArs.Pattern;
 using Com.oHMysTArs.Spaceship;
 using Com.oHMysTArs.UI;

@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using Com.oHMysTArs.Pattern;
 using Com.oHMysTArs.Spaceship;
+using Com.oHMysTArs.Assessment;
 
 public static class CsvToScriptableObject
 {
@@ -43,6 +44,23 @@ public static class CsvToScriptableObject
                 .ToList()
                 .Select(file => Resources.Load(file, typeof(SpaceshipSO)))
                 .Cast<SpaceshipSO>()
+                .ToList();
+        }
+    }
+
+    public static List<FeedbackSO> Feedbacks
+    {
+        get
+        {
+            return Directory
+                .GetFiles(
+                    dataDirectoryPath,
+                    "*.asset",
+                    SearchOption.TopDirectoryOnly
+                )
+                .ToList()
+                .Select(file => Resources.Load(file, typeof(FeedbackSO)))
+                .Cast<FeedbackSO>()
                 .ToList();
         }
     }

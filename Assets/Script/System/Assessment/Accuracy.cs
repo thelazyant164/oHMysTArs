@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Com.oHMysTArs.Level
+namespace Com.oHMysTArs.Assessment
 {
     public readonly struct Accuracy
     {
