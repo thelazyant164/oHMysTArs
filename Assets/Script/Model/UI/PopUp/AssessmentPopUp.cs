@@ -1,4 +1,4 @@
-using Com.oHMysTArs.Level;
+using Com.oHMysTArs.Assessment;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,13 +10,14 @@ namespace Com.oHMysTArs.UI
 {
     public sealed class AssessmentPopUp : PopUp
     {
+        [Header("Feedback")]
         [SerializeField]
-        private Button backButton;
+        private GameObject feedbackPrefab;
         [SerializeField]
-        private Button replayButton;
-        [SerializeField]
-        private Button proceedButton;
+        private GameObject feedbackForum;
+        [Space]
 
+        [Header("Content")]
         [SerializeField]
         private TextMeshProUGUI title;
         [SerializeField]
@@ -25,13 +26,15 @@ namespace Com.oHMysTArs.UI
         private TextMeshProUGUI total;
         [SerializeField]
         private TextMeshProUGUI succeed;
+        [Space]
 
+        [Header("Control")]
         [SerializeField]
-        private StarRating accuracyRating;
+        private Button backButton;
         [SerializeField]
-        private StarRating punctualityRating;
+        private Button replayButton;
         [SerializeField]
-        private StarRating profitabilityRating;
+        private Button proceedButton;
 
         private Action _backDelegate;
         private Action _replayDelegate;
@@ -56,9 +59,6 @@ namespace Com.oHMysTArs.UI
 
             // TODO: finish setup report scene
             overallRating.Init(content.OverallRating);
-            accuracyRating.Init(content.Accuracy);
-            punctualityRating.Init(content.Punctuality);
-            profitabilityRating.Init(content.Profitability);
 
             _backDelegate = onBackCallback;
             _replayDelegate = onReplayCallback;
@@ -68,13 +68,7 @@ namespace Com.oHMysTArs.UI
 
         protected override void Reset()
         {
-            //title.SetText("");
-            //title.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText("");
-            //title.gameObject.SetActive(false);
             overallRating.Reset();
-            accuracyRating.Reset();
-            punctualityRating.Reset();
-            profitabilityRating.Reset();
         }
 
         private void OnBack()
