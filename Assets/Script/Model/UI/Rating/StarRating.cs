@@ -1,4 +1,4 @@
-using Com.oHMysTArs.Level;
+using Com.oHMysTArs.Assessment;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace Com.oHMysTArs.UI
         private GameObject unfilledStarPrefab;
         [SerializeField]
         private GameObject starPrefab;
-        private List<GameObject> stars;
+        private List<GameObject> stars = new();
 
         public void Init(Rating rating)
         {

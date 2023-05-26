@@ -17,9 +17,9 @@ namespace Com.oHMysTArs.Spaceship
         private readonly List<Pattern.Pattern> patterns = CsvToScriptableObject.Patterns;
         private readonly List<Texture2D> textures = Resources.LoadAll<Texture2D>("Spaceship/Texture").ToList();
 
-        public SpaceshipLoader() : base("SpaceshipSO", "Spaceship_data.csv") { }
+        public SpaceshipLoader() : base("Spaceship", "Spaceship_data.csv") { }
 
-        [MenuItem("Utility/Parse/SpaceshipSO")]
+        [MenuItem("Utility/Parse/Spaceship")]
         public static void Invoke() => new SpaceshipLoader().Generate();
 
         public override List<SpaceshipSO> ParseItems(string[] lines)
