@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public static class IGameObjectExtensions
+public static class IGameObjectExtension
 {
     private static List<GameObject> FindChildrenWithTag(this Transform parent, string tag)
     {
