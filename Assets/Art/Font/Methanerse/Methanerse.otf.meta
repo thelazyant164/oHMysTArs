@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: ed36f4d826c767a44b50d68e57fa84ff
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - METHANERSE Free Trial
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a2e3a09030299434083a99d3469a1b46, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
