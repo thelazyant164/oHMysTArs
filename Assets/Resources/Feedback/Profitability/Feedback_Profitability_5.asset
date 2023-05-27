@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d824b31e510d47947ab6871e3ad06, type: 3}
+  m_Name: Feedback_Profitability_5
+  m_EditorClassIdentifier: 
+  Type: 2
+  Rating: 3
+  Content: A standing ovation for the staff's ability to achieve the bare minimum!
+    They've mastered the art of average service.
+  Avatar: {fileID: 2800000, guid: 27458df34eeb1f34b9635b868d98902f, type: 3}
