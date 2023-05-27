@@ -21,8 +21,7 @@ namespace Com.oHMysTArs.UI
             timeline = GetComponentInChildren<Slider>();
         }
 
-        // Start is called before the first frame update
-        private void Start()
+        public void Init()
         {
             levelManager = GameManager.Instance.LevelManager;
             levelManager.OnStart += (object sender, Level.Level level) => timer = StartCoroutine(StartTimer(timePerSpaceship * level.Queue.Length));
@@ -32,14 +31,10 @@ namespace Com.oHMysTArs.UI
             };
         }
 
-        private void EndTimer(object sender, Level.Level e)
-        {
-            throw new System.NotImplementedException();
-        }
-
         private IEnumerator StartTimer(float time)
         {
             timeline.maxValue = time;
+            timeline.minValue = 0;
             while (time > 0)
             {
                 time -= Time.deltaTime;

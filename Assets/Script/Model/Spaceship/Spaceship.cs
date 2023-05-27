@@ -26,11 +26,12 @@ namespace Com.oHMysTArs.Spaceship
         public float ServeTime { get; private set; } = 0;
         public bool Succeed => state.CurrentQueueState is Succeed;
 
-        public void Init(SpaceshipSO so, Vector2 position, SpaceshipManager manager)
+        public void Init(SpaceshipSO so, Vector2 position)
         {
             data = so;
+            image.SetTexture(so.Texture);
             transform.position = position;
-            spaceshipManager = manager;
+            spaceshipManager = GameManager.Instance.SpaceshipManager;
             spaceshipManager.OnActiveSpaceshipChange += ProgressInQueue;
         }
 

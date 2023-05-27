@@ -8,6 +8,7 @@ namespace Com.oHMysTArs.Assessment
 {
     public sealed class Feedback : MonoBehaviour
     {
+        public FeedbackSO Data { get; private set; }
         [SerializeField]
         private Image avatar;
         [SerializeField]
@@ -17,21 +18,10 @@ namespace Com.oHMysTArs.Assessment
 
         public void Init(FeedbackSO feedback)
         {
+            Data = feedback;
             avatar.SetTexture(feedback.Avatar);
             text.SetText(feedback.Content);
             rating.SetText($"{(int)feedback.Rating}");
-        }
-
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
         }
     }
 }

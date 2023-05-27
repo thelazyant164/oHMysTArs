@@ -10,11 +10,8 @@ namespace Com.oHMysTArs.UI
 {
     public sealed class AssessmentPopUp : PopUp
     {
-        [Header("Feedback")]
         [SerializeField]
-        private GameObject feedbackPrefab;
-        [SerializeField]
-        private GameObject feedbackForum;
+        private Transform feedbackForum;
         [Space]
 
         [Header("Content")]
@@ -49,6 +46,7 @@ namespace Com.oHMysTArs.UI
 
         public void Show(
             LevelAssessment content,
+            FeedbackSO[] feedbacks,
             Action onBackCallback,
             Action onReplayCallback,
             Action onProceedCallback
@@ -57,8 +55,13 @@ namespace Com.oHMysTArs.UI
             title.gameObject.SetActive(true);
             title.SetText(content.Name);
 
-            // TODO: finish setup report scene
             overallRating.Init(content.OverallRating);
+            foreach (FeedbackSO feedback in feedbacks)
+            {
+                GameManager.Instance.FeedbackManager.CreateFeedback(feedback, feedbackForum);
+            }
+            total.SetText(content.Total.ToString());
+            succeed.SetText(content.Succeed.ToString());
 
             _backDelegate = onBackCallback;
             _replayDelegate = onReplayCallback;

@@ -3,15 +3,16 @@ using UnityEngine;
 public abstract class FiniteStateMachine : MonoBehaviour
 {
     public State CurrentState { get; private set; }
+    private Coroutine running;
 
     public void SetState(State newState)
     {
-        if (CurrentState != null) 
+        if (running != null) 
         {
-            StopCoroutine(CurrentState.Start()); 
-            CurrentState.Terminate();
+            StopCoroutine(running); 
         }
+        CurrentState?.Terminate();
         CurrentState = newState;
-        StartCoroutine(CurrentState.Start());
+        running = StartCoroutine(CurrentState.Start());
     }
 }

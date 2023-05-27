@@ -10,24 +10,10 @@ using Com.oHMysTArs.Spaceship;
 using Com.oHMysTArs.Assessment;
 using Com.oHMysTArs.Level;
 
-public static class DataReader
+public static class DataParser
 {
     public static string csvDirectoryPath = "Assets/Editor/CSV";
     public static string dataDirectoryPath = "Assets/Resources";
-
-    public static List<FeedbackSO> Feedbacks {
-        get
-        {
-            List<FeedbackSO> feedbacks = new();
-            feedbacks.AddRange(Resources.LoadAll<FeedbackSO>($"{dataDirectoryPath}/Feedback/Accuracy"));
-            feedbacks.AddRange(Resources.LoadAll<FeedbackSO>($"{dataDirectoryPath}/Feedback/Efficiency"));
-            feedbacks.AddRange(Resources.LoadAll<FeedbackSO>($"{dataDirectoryPath}/Feedback/Punctuality"));
-            feedbacks.AddRange(Resources.LoadAll<FeedbackSO>($"{dataDirectoryPath}/Feedback/Profitability"));
-            return feedbacks;
-        }
-    }
-
-    public static List<Level> Levels => Resources.LoadAll<Level>($"{dataDirectoryPath}/Level").ToList();
 
     public static int ParseInt(string strValue, int defaultValue = 0)
     {

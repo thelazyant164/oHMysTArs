@@ -41,8 +41,8 @@ namespace Com.oHMysTArs.Pattern
         private Coordinate ParseCoordinate(string coordinate)
         {
             string[] coordinates = coordinate.Split(":");
-            int column = DataReader.ParseInt(coordinates[0]);
-            int row = DataReader.ParseInt(coordinates[1]);
+            int column = DataParser.ParseInt(coordinates[0]);
+            int row = DataParser.ParseInt(coordinates[1]);
             return new Coordinate(column, row);
         }
     }

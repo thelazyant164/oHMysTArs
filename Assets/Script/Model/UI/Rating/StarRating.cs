@@ -15,13 +15,13 @@ namespace Com.oHMysTArs.UI
 
         public void Init(Rating rating)
         {
-            for (int i = 0; i < 5 - (int)rating; i++)
-            {
-                stars.Add(GameObject.Instantiate(unfilledStarPrefab, transform));
-            }
             for (int i = 0; i < (int)rating; i++)
             {
                 stars.Add(GameObject.Instantiate(starPrefab, transform));
+            }
+            for (int i = 0; i < 5 - (int)rating; i++)
+            {
+                stars.Add(GameObject.Instantiate(unfilledStarPrefab, transform));
             }
         }
 

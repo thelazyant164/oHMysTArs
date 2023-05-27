@@ -11,7 +11,7 @@ namespace Com.oHMysTArs.Level
     public sealed class LevelManager : MonoBehaviour
     {
         private Level current;
-        private List<Level> levels;
+        private readonly List<Level> levels = new();
         private SpaceshipManager spaceshipManager;
         private Timeline timeline;
         public event EventHandler<Level> OnStart;
@@ -19,7 +19,7 @@ namespace Com.oHMysTArs.Level
 
         private void Awake()
         {
-            levels = Resources.LoadAll("Level", typeof(Level)).Cast<Level>().ToList();
+            levels.AddRange(Resources.LoadAll<Level>("Level"));
         }
 
         void Start()

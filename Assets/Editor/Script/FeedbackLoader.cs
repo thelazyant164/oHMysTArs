@@ -11,7 +11,7 @@ using static Com.oHMysTArs.Grid.GridSystem;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace Com.oHMysTArs.Spaceship
+namespace Com.oHMysTArs.Assessment
 {
     public sealed class FeedbackLoader : BaseLoader<FeedbackSO>
     {
@@ -43,7 +43,7 @@ namespace Com.oHMysTArs.Spaceship
                 if (fields.Length == 0) break;
                 FeedbackSO newFeedback = FeedbackSO.Init(
                     $"Feedback_{type.ToString()}_{generatedCount}", type, 
-                    (Rating)DataReader.ParseInt(fields[1]), 
+                    (Rating)DataParser.ParseInt(fields[1]), 
                     fields[0].Substring(3, fields[0].Length - 6),
                     textures.GetRandom());
                 items.Add(newFeedback);

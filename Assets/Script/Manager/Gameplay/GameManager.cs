@@ -6,6 +6,7 @@ using Com.oHMysTArs.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Com.oHMysTArs
 {
@@ -15,6 +16,7 @@ namespace Com.oHMysTArs
         private string levelName;
         public DrawHistory DrawHistory { get; private set; }
         public LevelManager LevelManager { get; private set; }
+        public FeedbackManager FeedbackManager { get; private set; }
         public SpaceshipManager SpaceshipManager { get; private set; }
 
         private void Awake()
@@ -28,20 +30,28 @@ namespace Com.oHMysTArs
 
             DrawHistory = GetComponentInChildren<DrawHistory>();
             LevelManager = GetComponentInChildren<LevelManager>();
+            FeedbackManager = GetComponentInChildren<FeedbackManager>();
             SpaceshipManager = GetComponentInChildren<SpaceshipManager>();
-            SpaceshipManager.Init();
         }
 
         private void Start()
         {
+            SpaceshipManager.Init();
             DrawHistory.Init();
+            UIManager.Instance.Timeline.Init();
             LevelManager.PlayLevel(levelName);
             LevelManager.OnFinish += ShowLevelAssessment;
         }
 
         private void ShowLevelAssessment(object sender, Level.Level level)
         {
-            PopUpManager.Instance.ShowAssessment(new LevelAssessment(level.name, SpaceshipManager.Done));
+            LevelAssessment assessment = new LevelAssessment(level.name, SpaceshipManager.Done);
+            FeedbackSO[] feedbacks = FeedbackManager.CreateFeedbacks(assessment);
+            PopUpManager.Instance.ShowAssessment(assessment, feedbacks, 
+                () => SceneManager.LoadSceneAsync("Menu"), 
+                () => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex),
+                // TODO: as there is only 1 level right now, "proceed" replays level - make levels progress in order
+                () => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
         }
     }
 }

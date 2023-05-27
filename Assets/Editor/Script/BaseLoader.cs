@@ -13,8 +13,8 @@ public abstract class BaseLoader<T> where T : ScriptableObject
 {
     private readonly string directoryName;
     private readonly string csvFileName;
-    private string CsvFilePath => $"{DataReader.csvDirectoryPath}/{csvFileName}";
-    private string OutDir => $"{DataReader.dataDirectoryPath}/{directoryName}";
+    private string CsvFilePath => $"{DataParser.csvDirectoryPath}/{csvFileName}";
+    private string OutDir => $"{DataParser.dataDirectoryPath}/{directoryName}";
 
     public BaseLoader(string directoryName, string csvFileName)
     {

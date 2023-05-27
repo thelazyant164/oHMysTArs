@@ -27,9 +27,8 @@ namespace Com.oHMysTArs.UI
             Action onProceedCallback
         ) => FindPopUp<RedirectPopUp>().Show(content, onProceedCallback);
 
-        // TODO: fill out callbacks
-        public void ShowAssessment(LevelAssessment assessment) 
-            => FindPopUp<AssessmentPopUp>().Show(assessment, () => { }, () => { }, () => { });
+        public void ShowAssessment(LevelAssessment assessment, FeedbackSO[] feedbacks, Action onBackCallback, Action onReplayCallback, Action onProceedCallback) 
+            => FindPopUp<AssessmentPopUp>().Show(assessment, feedbacks, onBackCallback, onReplayCallback, onProceedCallback);
 
         private void Awake()
         {
@@ -40,7 +39,6 @@ namespace Com.oHMysTArs.UI
             }
             Instance = this;
             transform.parent = null;
-            DontDestroyOnLoad(this.gameObject);
         }
     }
 }

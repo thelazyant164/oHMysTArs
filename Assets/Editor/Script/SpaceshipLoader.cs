@@ -35,7 +35,7 @@ namespace Com.oHMysTArs.Spaceship
                 Texture2D texture = solidTextures.Find(texture => texture.name == fields[0]);
                 Texture2D scanTexture = scanTextures.Find(texture => texture.name == $"{fields[0]}_scan_v2");
                 SpaceshipSO newSpaceship = SpaceshipSO.Init(fields[0], pattern, 
-                    DataReader.ParseInt(fields[2]) == 1, 
+                    DataParser.ParseInt(fields[2]) == 1, 
                     texture, scanTexture);
                 items.Add(newSpaceship);
             }
