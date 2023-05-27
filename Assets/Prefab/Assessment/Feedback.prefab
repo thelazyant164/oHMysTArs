@@ -69,8 +69,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ed33d6bb2877ca64fa7d5173caad4688, type: 2}
+  m_sharedMaterial: {fileID: -4147736980857349404, guid: ed33d6bb2877ca64fa7d5173caad4688, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -219,8 +219,8 @@ MonoBehaviour:
   m_text: '"Kudos on achieving the impossible: losing an alien in the vastness of
     space. Well done!"'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8b0031b07bbc6e746b5618a13f8de2ee, type: 2}
+  m_sharedMaterial: {fileID: -6458984924044847462, guid: 8b0031b07bbc6e746b5618a13f8de2ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
