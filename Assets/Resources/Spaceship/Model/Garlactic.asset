@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94d18409e5210914caebf40470e32eda, type: 3}
+  m_Name: Garlactic
+  m_EditorClassIdentifier: 
+  Pattern: {fileID: 11400000, guid: 794adb751e8471843affae40391aaa60, type: 2}
+  VIP: 1
+  Texture: {fileID: 2800000, guid: c538e5567c3158f4aa581a0b8015a68b, type: 3}
+  ScanTexture: {fileID: 2800000, guid: 06ee5dc563a8d4b41804587b8a2daa5f, type: 3}

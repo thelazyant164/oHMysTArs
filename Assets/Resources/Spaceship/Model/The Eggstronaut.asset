@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94d18409e5210914caebf40470e32eda, type: 3}
-  m_Name: Spaceship 1
+  m_Name: The Eggstronaut
   m_EditorClassIdentifier: 
-  Pattern: {fileID: 11400000, guid: 0a47c3da25350714799a6bbe3e01685d, type: 2}
-  VIP: 1
-  Texture: {fileID: 2800000, guid: 49a4a7181293ca84692390c393ec12e0, type: 3}
+  Pattern: {fileID: 11400000, guid: 733e7333c824a5a4eab41bf07d2b9899, type: 2}
+  VIP: 0
+  Texture: {fileID: 2800000, guid: 7639932d306efa346ac45b33ea136278, type: 3}
+  ScanTexture: {fileID: 2800000, guid: 9bdadc3fdfc29ff4ca6627aac67753f9, type: 3}
