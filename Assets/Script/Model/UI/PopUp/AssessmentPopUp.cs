@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Com.oHMysTArs.UI
 {
@@ -33,28 +34,13 @@ namespace Com.oHMysTArs.UI
         [SerializeField]
         private Button proceedButton;
 
-        private Action _backDelegate;
-        private Action _replayDelegate;
-        private Action _proceedDelegate;
-
-        private void Awake()
-        {
-            backButton.onClick.AddListener(OnBack);
-            replayButton.onClick.AddListener(OnReplay);
-            proceedButton.onClick.AddListener(OnProceed);
-        }
-
         public void Show(
             LevelAssessment content,
-            FeedbackSO[] feedbacks,
-            Action onBackCallback,
-            Action onReplayCallback,
-            Action onProceedCallback
+            FeedbackSO[] feedbacks
         )
         {
             title.gameObject.SetActive(true);
             title.SetText(content.Name);
-
             overallRating.Init(content.OverallRating);
             foreach (FeedbackSO feedback in feedbacks)
             {
@@ -63,42 +49,16 @@ namespace Com.oHMysTArs.UI
             total.SetText(content.Total.ToString());
             succeed.SetText(content.Succeed.ToString());
 
-            _backDelegate = onBackCallback;
-            _replayDelegate = onReplayCallback;
-            _proceedDelegate = onProceedCallback;
+            backButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("MenuScene"));
+            replayButton.onClick.AddListener(() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
+            // TODO: as there is only 1 level right now, "proceed" replays level - make levels progress in order
+            proceedButton.onClick.AddListener(() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
             base.Show();
         }
 
         protected override void Reset()
         {
             overallRating.Reset();
-        }
-
-        private void OnBack()
-        {
-            if (_backDelegate != null)
-            {
-                _backDelegate();
-            }
-            Hide();
-        }
-
-        private void OnReplay()
-        {
-            if (_replayDelegate != null)
-            {
-                _replayDelegate();
-            }
-            Hide();
-        }
-
-        private void OnProceed()
-        {
-            if (_proceedDelegate != null)
-            {
-                _proceedDelegate();
-            }
-            Hide();
         }
     }
 }

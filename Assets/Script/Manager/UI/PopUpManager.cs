@@ -27,8 +27,7 @@ namespace Com.oHMysTArs.UI
             Action onProceedCallback
         ) => FindPopUp<RedirectPopUp>().Show(content, onProceedCallback);
 
-        public void ShowAssessment(LevelAssessment assessment, FeedbackSO[] feedbacks, Action onBackCallback, Action onReplayCallback, Action onProceedCallback) 
-            => FindPopUp<AssessmentPopUp>().Show(assessment, feedbacks, onBackCallback, onReplayCallback, onProceedCallback);
+        public void ShowAssessment(LevelAssessment assessment, FeedbackSO[] feedbacks) => FindPopUp<AssessmentPopUp>().Show(assessment, feedbacks);
 
         private void Awake()
         {
