@@ -25,6 +25,8 @@ namespace Com.oHMysTArs.Spaceship
         public int Attempts { get; private set; } = 0;
         public float ServeTime { get; private set; } = 0;
         public bool Succeed => state.CurrentQueueState is Succeed;
+        public Texture2D ScanTexture => data.ScanTexture;
+        public string Plate => data.Pattern.name;
 
         public void Init(SpaceshipSO so, Vector2 position)
         {
