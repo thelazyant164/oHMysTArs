@@ -5,15 +5,18 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Linq.Expressions;
+using Com.oHMysTArs.Pattern;
+using Com.oHMysTArs.Spaceship;
+using Com.oHMysTArs.Level;
 
-public abstract class BaseGenerator<T> where T : ScriptableObject
+public abstract class BaseLoader<T> where T : ScriptableObject
 {
     private readonly string directoryName;
     private readonly string csvFileName;
-    private string CsvFilePath => $"{CsvToScriptableObject.csvDirectoryPath}/{csvFileName}";
-    private string OutDir => $"{CsvToScriptableObject.dataDirectoryPath}/{directoryName}";
+    private string CsvFilePath => $"{DataReader.csvDirectoryPath}/{csvFileName}";
+    private string OutDir => $"{DataReader.dataDirectoryPath}/{directoryName}";
 
-    public BaseGenerator(string directoryName, string csvFileName)
+    public BaseLoader(string directoryName, string csvFileName)
     {
         this.directoryName = directoryName;
         this.csvFileName = csvFileName;

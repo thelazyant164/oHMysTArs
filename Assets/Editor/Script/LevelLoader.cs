@@ -1,25 +1,19 @@
-using Com.oHMysTArs.Pattern;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEditor;
-using UnityEngine;
-using System.Reflection;
-using Com.oHMysTArs.Grid;
-using System.Linq;
 using Com.oHMysTArs.Spaceship;
-using static Com.oHMysTArs.Grid.GridSystem;
+using UnityEngine;
+using System.Linq;
 
 namespace Com.oHMysTArs.Level
 {
-    public sealed class LevelLoader : BaseGenerator<Level>
+    public sealed class LevelLoader : BaseLoader<Level>
     {
-        private readonly List<Spaceship.SpaceshipSO> spaceships = CsvToScriptableObject.Spaceships;
+        private readonly List<SpaceshipSO> spaceships = Resources.LoadAll<SpaceshipSO>("Spaceship/Model").ToList();
 
         public LevelLoader() : base("Level", "Level_data.csv") { }
 
         [MenuItem("Utility/Parse/Level")]
-        public static void Invoke() => new PatternLoader().Generate();
+        public static void Invoke() => new LevelLoader().Generate();
 
         public override List<Level> ParseItems(string[] lines)
         {
@@ -28,10 +22,11 @@ namespace Com.oHMysTArs.Level
             {
                 string[] fields = line.Split(",");
                 if (fields.Length == 0) break;
-                Spaceship.SpaceshipSO[] predefinedOrder = new Spaceship.SpaceshipSO[fields.Length - 1];
-                for (int i = 1; i < fields.Length; i++) 
+                SpaceshipSO[] predefinedOrder = new SpaceshipSO[fields.Length - 1];
+                for (int i = 0; i < predefinedOrder.Length; i++) 
                 {
-                    predefinedOrder[i - 1] = spaceships.Find(spaceship => spaceship.name == fields[i]);
+                    if (fields[i + 1] == "") break;
+                    predefinedOrder[i] = spaceships.Find(spaceship => spaceship.name == fields[i + 1]);
                 }
 
                 Level newLevel = Level.Init(fields[0], predefinedOrder);

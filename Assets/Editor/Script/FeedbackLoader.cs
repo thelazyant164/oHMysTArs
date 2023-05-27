@@ -9,14 +9,16 @@ using Com.oHMysTArs.Assessment;
 using System.Linq;
 using static Com.oHMysTArs.Grid.GridSystem;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Com.oHMysTArs.Spaceship
 {
-    public sealed class FeedbackLoader : BaseGenerator<FeedbackSO>
+    public sealed class FeedbackLoader : BaseLoader<FeedbackSO>
     {
         private static List<Texture2D> textures = Resources.LoadAll<Texture2D>("Feedback/Avatar").ToList();
         private readonly Type type;
         private int generatedCount = 0;
+        private static readonly Regex regEx = new Regex(",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
 
         public FeedbackLoader(Type type, string outDir, string inDir) : base(outDir, inDir) 
         {
@@ -37,12 +39,13 @@ namespace Com.oHMysTArs.Spaceship
             List<FeedbackSO> items = new();
             foreach (string line in lines)
             {
-                string[] fields = line.Split(",");
+                string[] fields = regEx.Split(line);
                 if (fields.Length == 0) break;
                 FeedbackSO newFeedback = FeedbackSO.Init(
-                    $"Feedback_{nameof(type)}_{generatedCount}", type, 
-                    (Rating)CsvToScriptableObject.ParseInt(fields[1]), 
-                    fields[0], textures.GetRandom());
+                    $"Feedback_{type.ToString()}_{generatedCount}", type, 
+                    (Rating)DataReader.ParseInt(fields[1]), 
+                    fields[0].Substring(3, fields[0].Length - 6),
+                    textures.GetRandom());
                 items.Add(newFeedback);
                 generatedCount++;
             }
