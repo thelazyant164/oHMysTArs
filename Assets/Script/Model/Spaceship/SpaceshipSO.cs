@@ -5,7 +5,7 @@ using Com.oHMysTArs.Pattern;
 
 namespace Com.oHMysTArs.Spaceship
 {
-    [CreateAssetMenu(fileName = "New Spaceship", menuName = "SpaceshipSO")]
+    [CreateAssetMenu(fileName = "New Spaceship", menuName = "Spaceship")]
     public sealed class SpaceshipSO : ScriptableObject
     {
         public Pattern.Pattern Pattern;

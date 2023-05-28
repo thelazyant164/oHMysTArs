@@ -11,9 +11,10 @@ namespace Com.oHMysTArs.Input
     public sealed class PointSelectionManager : MonoBehaviour
     {
         private InputManager inputManager;
-        public event EventHandler OnStopHover;
         public event EventHandler<Point> OnHover;
+        public event EventHandler<Point> OnStopHover;
         public event EventHandler<Point> OnSelect;
+        private Point lastHovering;
 
         private void Start()
         {
@@ -22,15 +23,21 @@ namespace Com.oHMysTArs.Input
 
         public void Update()
         {
-            OnStopHover?.Invoke(this, EventArgs.Empty);
-            if (!TrySelectPoint(out Point point) || point.Active) return;
+            if (!TrySelectPoint(out Point point) || point.Active) 
+            {
+                OnStopHover?.Invoke(this, lastHovering);
+                lastHovering = null;
+                return; 
+            }
+            if (lastHovering != point) 
+            {
+                OnStopHover?.Invoke(this, lastHovering);
+                OnHover?.Invoke(this, point);
+                lastHovering = point;
+            }
             if (inputManager.IsMouseDown)
             {
                 OnSelect?.Invoke(this, point);
-            }
-            else
-            {
-                OnHover?.Invoke(this, point);
             }
         }
 

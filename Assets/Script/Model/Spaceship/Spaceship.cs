@@ -10,14 +10,30 @@ namespace Com.oHMysTArs.Spaceship
 {
     public sealed class Spaceship : MonoBehaviour
     {
+        [Header("Movement")]
         [SerializeField]
         private float velocity = 1;
+        [Space]
+
+        [Header("Animation")]
         [SerializeField]
-        private float fadeDuration;
+        private float fadeDuration = 1;
+        [Space]
+
+        [Header("SFX")]
+        [SerializeField]
+        private AudioClip succeedSFX;
+        [SerializeField]
+        private AudioClip failSFX;
+        [SerializeField]
+        private AudioClip moveSFX;
+        [SerializeField]
+        private AudioClip idleSFX;
+
+        private AudioSource spaceshipAudio;
         private SpaceshipSO data;
         private QueueSystem state;
         private SpaceshipManager spaceshipManager;
-        private Vector2 target;
         private Animator animator;
         private Image image;
         public bool VIP => data.VIP;
@@ -39,6 +55,7 @@ namespace Com.oHMysTArs.Spaceship
 
         private void Awake()
         {
+            spaceshipAudio = GetComponentInChildren<AudioSource>();
             state = GetComponentInChildren<QueueSystem>();
             state.SetState(new Waiting(state));
             image = GetComponentInChildren<Image>();
@@ -46,20 +63,28 @@ namespace Com.oHMysTArs.Spaceship
             animator.enabled = false;
         }
 
-        private void FixedUpdate()
+        private IEnumerator MoveTowards(Vector2 target)
         {
-            if (state.CurrentQueueState is Succeed || state.CurrentQueueState is Failed) return;
-            transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * velocity);
+            spaceshipAudio.Stop();
+            spaceshipAudio.PlayOneShot(moveSFX);
+            while (Vector2.Distance(transform.position, target) > Vector2.kEpsilon)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, target, Time.deltaTime * velocity);
+                yield return null;
+            }
+            spaceshipAudio.Stop();
         }
 
         private void ProgressInQueue(object sender, Spaceship spaceship) 
         {
             if (spaceship != this) return;
             state.SetState(new Serving(state));
+            spaceshipAudio.Stop();
+            spaceshipAudio.Play();
             spaceshipManager.OnActiveSpaceshipChange -= ProgressInQueue;
         }
 
-        public void MoveTo(Vector2 position) => target = position;
+        public void MoveTo(Vector2 position) => StartCoroutine(MoveTowards(position));
 
         public void Draw(object sender, bool match)
         {
@@ -69,33 +94,22 @@ namespace Com.oHMysTArs.Spaceship
 
         public void Record(float time) => ServeTime = time;
 
-        public void PlaySucceedAnimation()
+        public void PlaySucceed()
         {
             animator.enabled = true;
             animator.SetTrigger("Succeed");
-            StartCoroutine(FadeOut());
+            StartCoroutine(image.Fade(fadeDuration));
+            spaceshipAudio.Stop();
+            spaceshipAudio.PlayOneShot(succeedSFX);
         }
 
-        public void PlayFailAnimation()
+        public void PlayFail()
         {
             animator.enabled = true;
             animator.SetTrigger("Fail");
-            StartCoroutine(FadeOut());
-        }
-
-        private IEnumerator FadeOut()
-        {
-            float startingAlpha = image.color.a;
-            float endAlpha = 0.0f;
-            float timer = 0.0f;
-            while (timer < fadeDuration)
-            {
-                timer += Time.deltaTime;
-                float currentAlpha = Mathf.Lerp(startingAlpha, endAlpha, timer / fadeDuration);
-                image.color = new Color(image.color.r, image.color.g, image.color.b, currentAlpha);
-                yield return null;
-            }
-            image.enabled = false;
+            StartCoroutine(image.Fade(fadeDuration));
+            spaceshipAudio.Stop();
+            spaceshipAudio.PlayOneShot(failSFX);
         }
 
         public void StopServing() 

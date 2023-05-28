@@ -16,6 +16,10 @@ namespace Com.oHMysTArs.Level
         private Timeline timeline;
         public event EventHandler<Level> OnStart;
         public event EventHandler<Level> OnFinish;
+        [SerializeField]
+        private AudioClip winSFX;
+        [SerializeField]
+        private AudioClip loseSFX;
 
         private void Awake()
         {
@@ -26,12 +30,19 @@ namespace Com.oHMysTArs.Level
         {
             timeline = UIManager.Instance.Timeline;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
-            spaceshipManager.OnEndQueue += EndLevel;
-            timeline.OnTimerEnd += EndLevel;
+            spaceshipManager.OnEndQueue += EndLevelWin;
+            timeline.OnTimerEnd += EndLevelLose;
         }
 
-        private void EndLevel(object sender, EventArgs e)
+        private void EndLevelWin(object sender, EventArgs e)
         {
+            UIManager.Instance.UIAudio.PlayOneShot(winSFX);
+            OnFinish?.Invoke(this, current);
+        }
+
+        private void EndLevelLose(object sender, EventArgs e)
+        {
+            UIManager.Instance.UIAudio.PlayOneShot(loseSFX);
             OnFinish?.Invoke(this, current);
         }
 

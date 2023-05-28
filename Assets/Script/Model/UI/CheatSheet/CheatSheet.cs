@@ -9,6 +9,13 @@ namespace Com.oHMysTArs.UI
 {
     public sealed class CheatSheet : MonoBehaviour
     {
+        [Header("SFX")]
+        [SerializeField]
+        private AudioClip openCheatSheetSFX;
+        [SerializeField]
+        private AudioClip closeCheatSheetSFX;
+        [Space]
+
         [SerializeField]
         private GameObject cheatSheet;
         private Image cheatSheetGraphic;
@@ -16,15 +23,17 @@ namespace Com.oHMysTArs.UI
         private InputManager inputManager;
         public event EventHandler OnHover;
         public event EventHandler OnStopHover;
+        private AudioSource audioSource;
 
         private void Awake() => cheatSheetTrigger = GetComponentInChildren<Image>();
 
         private void Start()
         {
+            audioSource = UIManager.Instance.UIAudio;
             inputManager = InputManager.Instance;
             cheatSheetGraphic = cheatSheet.GetComponentInChildren<Image>();
+            cheatSheetGraphic.enabled = false;
             OnHover += OpenCheatsheet;
-            CloseCheatsheet(this, EventArgs.Empty);
         }
 
         public void FixedUpdate()
@@ -51,6 +60,7 @@ namespace Com.oHMysTArs.UI
 
         private void OpenCheatsheet(object sender, EventArgs e)
         {
+            audioSource.PlayOneShot(openCheatSheetSFX);
             OnHover -= OpenCheatsheet;
             OnStopHover += CloseCheatsheet;
             cheatSheetGraphic.enabled = true; 
@@ -58,6 +68,7 @@ namespace Com.oHMysTArs.UI
 
         private void CloseCheatsheet(object sender, EventArgs e) 
         {
+            audioSource.PlayOneShot(closeCheatSheetSFX);
             OnStopHover -= CloseCheatsheet;
             OnHover += OpenCheatsheet;
             cheatSheetGraphic.enabled = false; 

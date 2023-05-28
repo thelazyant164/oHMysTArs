@@ -14,6 +14,8 @@ namespace Com.oHMysTArs.Spaceship
         private Queue.Queue queue;
         [SerializeField]
         private GameObject spaceshipPrefab;
+        [SerializeField]
+        private float queueShiftDelay = 1f;
         [Space]
 
         [Header("State")]
@@ -45,6 +47,12 @@ namespace Com.oHMysTArs.Spaceship
                 done.Add(last);
                 OnDoneServing?.Invoke(this, last);
             }
+            StartCoroutine(ShiftQueueUp(queueShiftDelay));
+        }
+
+        private IEnumerator ShiftQueueUp(float delay)
+        {
+            yield return new WaitForSeconds(delay);
             if (Current != null)
             {
                 OnActiveSpaceshipChange?.Invoke(this, Current);

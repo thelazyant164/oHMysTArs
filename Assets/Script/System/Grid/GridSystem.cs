@@ -31,17 +31,9 @@ namespace Com.oHMysTArs.Grid
         private int rowCount = 3;
         [Space]
 
-        [Header("Grid layout")]
-        [SerializeField]
-        private float pointDistance = 5f;
-        [SerializeField]
-        private Transform rootPoint;
-        [Space]
-
         [Header("Grid prefabs")]
         [SerializeField]
         private GameObject pointPrefab;
-
         private readonly List<Point> points = new();
 
         private void Awake()
@@ -52,7 +44,6 @@ namespace Com.oHMysTArs.Grid
                 {
                     GameObject newPoint = Instantiate(pointPrefab, transform);
                     Point point = newPoint.GetComponent<Point>();
-                    point.transform.position = rootPoint.position + new Vector3(j * pointDistance, i * pointDistance);
                     point.Setup(new Coordinate(i, j));
                     points.Add(point);
                 }

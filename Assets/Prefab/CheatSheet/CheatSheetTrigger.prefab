@@ -31,12 +31,12 @@ RectTransform:
   m_Children:
   - {fileID: 6450900127946772421}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2019145539052509545
 MonoBehaviour:
@@ -50,7 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9132742d4349ac549817ec2565869c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cheatsheet: {fileID: 0}
+  openCheatSheetSFX: {fileID: 8300000, guid: c12337c18e039ed468057fa10aa39fdf, type: 3}
+  closeCheatSheetSFX: {fileID: 8300000, guid: f44ae249cc5f06b45b39383d28ace69d, type: 3}
+  cheatSheet: {fileID: 0}
 --- !u!1 &5256150808419590806
 GameObject:
   m_ObjectHideFlags: 0
@@ -62,6 +64,7 @@ GameObject:
   - component: {fileID: 6450900127946772421}
   - component: {fileID: 3149644046710644896}
   - component: {fileID: 5037693641064374515}
+  - component: {fileID: 7112237286973619520}
   m_Layer: 5
   m_Name: HoverButton
   m_TagString: Untagged
@@ -84,11 +87,11 @@ RectTransform:
   m_Father: {fileID: 889136487188623713}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -5}
-  m_SizeDelta: {x: 66.68, y: 66.68}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -15}
+  m_SizeDelta: {x: 80, y: 0}
+  m_Pivot: {x: 0, y: 1}
 --- !u!222 &3149644046710644896
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -117,7 +120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d42ba035a18f51a4f8575f72e1adca70, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e23b78e0f09de1845939be2d638b9127, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -127,3 +130,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7112237286973619520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256150808419590806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 1
+  m_AspectRatio: 1.1752903

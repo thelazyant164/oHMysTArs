@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ namespace Com.oHMysTArs.Queue
         [SerializeField]
         private float maxDuration = .15f;
         private Coroutine flickerEffect;
+        private AudioSource flickerAudioSource;
         [Space]
 
         [Header("Queue layout")]
@@ -37,6 +39,11 @@ namespace Com.oHMysTArs.Queue
         private Vector2 offset => lastInLine.position - servingPosition.position;
         private SpaceshipManager spaceshipManager;
 
+        private void Awake()
+        {
+            flickerAudioSource = GetComponentInChildren<AudioSource>();
+        }
+
         private void Start()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
@@ -45,6 +52,7 @@ namespace Com.oHMysTArs.Queue
             spaceshipManager.OnEndQueue += (object sender, EventArgs e) =>
             {
                 StopCoroutine(flickerEffect);
+                flickerAudioSource.Stop();
                 plate.gameObject.SetActive(false);
                 scan.gameObject.SetActive(false);
                 spaceshipManager.OnActiveSpaceshipChange -= Progress;
@@ -65,10 +73,13 @@ namespace Com.oHMysTArs.Queue
                 StartCoroutine(scan.Fade(duration));
                 StartCoroutine(plate.Fade(duration));
                 yield return new WaitForSeconds(duration);
+
                 // Fade back in
+                flickerAudioSource.Play();
                 StartCoroutine(scan.Fade(duration));
                 StartCoroutine(plate.Fade(duration));
                 yield return new WaitForSeconds(duration);
+                flickerAudioSource.Stop();
             }
         }
 
@@ -76,11 +87,11 @@ namespace Com.oHMysTArs.Queue
         {
             if (spaceship.Succeed)
             {
-                spaceship.PlaySucceedAnimation();
+                spaceship.PlaySucceed();
             }
             else
             {
-                spaceship.PlayFailAnimation();
+                spaceship.PlayFail();
             }
         }
 

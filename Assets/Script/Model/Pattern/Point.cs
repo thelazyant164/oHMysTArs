@@ -1,4 +1,5 @@
 using Com.oHMysTArs.Input;
+using Com.oHMysTArs.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace Com.oHMysTArs.Grid
 {
     public sealed class Point : MonoBehaviour
     {
-        [Header("Dot configurations")]
+        [Header("Texture")]
         [SerializeField]
         private Sprite star;
         [SerializeField]
@@ -21,6 +22,17 @@ namespace Com.oHMysTArs.Grid
         [SerializeField]
         private bool active;
         public bool Active => active;
+        [SerializeField]
+        private bool hover = false;
+        [Space]
+
+        [Header("SFX")]
+        [SerializeField]
+        private AudioClip twinkleSelect;
+        [SerializeField]
+        private AudioClip clinkHover1;
+        [SerializeField]
+        private AudioClip clinkHover2;
 
         public Coordinate Coordinate { get; private set; }
         private Image image;
@@ -44,11 +56,12 @@ namespace Com.oHMysTArs.Grid
             selectionManager.OnHover += (object sender, Point point) =>
             {
                 if (Active || this != point) return;
+                UIManager.Instance.UIAudio.PlayOneShot(UnityEngine.Random.Range(0, 1) == 0 ? clinkHover1 : clinkHover2, .25f);
                 Select();
             };
-            selectionManager.OnStopHover += (object sender, EventArgs e) =>
+            selectionManager.OnStopHover += (object sender, Point point) =>
             {
-                if (Active) return;
+                if (Active || this != point) return;
                 Deselect();
             };
         }
@@ -60,6 +73,7 @@ namespace Com.oHMysTArs.Grid
 
         public void Activate()
         {
+            UIManager.Instance.UIAudio.PlayOneShot(twinkleSelect, .25f);
             active = true;
             Select();
         }

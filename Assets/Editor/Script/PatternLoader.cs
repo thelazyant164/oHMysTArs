@@ -25,14 +25,14 @@ namespace Com.oHMysTArs.Pattern
             {
                 string[] fields = line.Split(",");
                 if (fields.Length == 0) break;
-                Coordinate[] predefinedOrder = new Coordinate[fields.Length - 1];
-                for (int i = 0; i < predefinedOrder.Length; i++) 
+                List<Coordinate> predefinedOrder = new();
+                for (int i = 0; i < fields.Length - 1; i++) 
                 {
                     if (fields[i + 1] == "") break;
-                    predefinedOrder[i] = ParseCoordinate(fields[i + 1]);
+                    predefinedOrder.Add(ParseCoordinate(fields[i + 1]));
                 }
 
-                Pattern newPattern = Pattern.Init(fields[0], predefinedOrder);
+                Pattern newPattern = Pattern.Init(fields[0], predefinedOrder.ToArray());
                 items.Add(newPattern);
             }
             return items;
