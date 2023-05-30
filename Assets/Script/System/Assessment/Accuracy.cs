@@ -32,7 +32,7 @@ namespace Com.oHMysTArs.Assessment
                     Rating = Rating.Four;
                     break;
                 default:
-                    Rating = Rating.One;
+                    Rating = Rating.Five;
                     break;
             }
         }

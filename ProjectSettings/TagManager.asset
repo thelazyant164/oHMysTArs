@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CheatSheet
   layers:
   - Default
   - TransparentFX
@@ -11,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Grid
+  - 
   - 
   - 
   - 
@@ -40,4 +41,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: TutorialIgnore
+    uniqueID: 771511975
+    locked: 0
+  - name: TutorialFocus
+    uniqueID: 3170695573
+    locked: 0
+  - name: UI
+    uniqueID: 892036353
+    locked: 0
+  - name: PopUp
+    uniqueID: 2077665555
     locked: 0

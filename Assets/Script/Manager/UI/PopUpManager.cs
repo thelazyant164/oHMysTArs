@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Com.oHMysTArs.Tutorial;
 
 namespace Com.oHMysTArs.UI
 {
@@ -11,21 +12,18 @@ namespace Com.oHMysTArs.UI
     {
         [SerializeField]
         private List<PopUp> popUpList;
+        public bool Pause => FindPopUp<PausePopUp>().gameObject.activeInHierarchy;
 
         private T FindPopUp<T>() where T : PopUp => popUpList.Find(o => o is T) as T;
 
+        public void ShowTutorial(TutorialContent content) => FindPopUp<TutorialPopUp>().Show(content);
+
         public void ShowConfirm(
-            ConfirmPopUp.ConfirmPopUpContent content,
-            Action onProceedCallback,
-            Action onDismissCallback
-        ) => FindPopUp<ConfirmPopUp>().Show(content, onProceedCallback, onDismissCallback);
-
-        public void ShowMessage(string message) => FindPopUp<MessagePopUp>().Show(message);
-
-        public void ShowRedirect(
-            RedirectPopUp.RedirectPopUpContent content,
+            string warning,
             Action onProceedCallback
-        ) => FindPopUp<RedirectPopUp>().Show(content, onProceedCallback);
+        ) => FindPopUp<ConfirmPopUp>().Show(warning, onProceedCallback);
+
+        public void ShowPause() => FindPopUp<PausePopUp>().Show();
 
         public void ShowAssessment(LevelAssessment assessment, FeedbackSO[] feedbacks) => FindPopUp<AssessmentPopUp>().Show(assessment, feedbacks);
 
@@ -37,7 +35,6 @@ namespace Com.oHMysTArs.UI
                 return;
             }
             Instance = this;
-            transform.parent = null;
         }
     }
 }

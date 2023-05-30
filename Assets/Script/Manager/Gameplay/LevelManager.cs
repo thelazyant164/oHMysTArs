@@ -26,7 +26,7 @@ namespace Com.oHMysTArs.Level
             levels.AddRange(Resources.LoadAll<Level>("Level"));
         }
 
-        void Start()
+        private void Start()
         {
             timeline = UIManager.Instance.Timeline;
             spaceshipManager = GameManager.Instance.SpaceshipManager;

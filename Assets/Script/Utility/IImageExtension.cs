@@ -30,4 +30,17 @@ public static class IImageExtension
 
         image.color = targetColor;
     }
+
+    public static int GetSortingLayer(this Image image)
+    {
+        Canvas canvas = image.GetComponentInParent<Canvas>();
+        return canvas.sortingLayerID;
+    }
+
+    public static void SetSortingLayer(this Image image, int sortingLayerId)
+    {
+        Canvas canvas = image.GetComponentInParent<Canvas>();
+        canvas.overrideSorting = true;
+        canvas.sortingLayerID = sortingLayerId;
+    }
 }

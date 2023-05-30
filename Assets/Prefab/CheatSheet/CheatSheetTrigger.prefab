@@ -50,8 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9132742d4349ac549817ec2565869c4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openCheatSheetSFX: {fileID: 8300000, guid: c12337c18e039ed468057fa10aa39fdf, type: 3}
-  closeCheatSheetSFX: {fileID: 8300000, guid: f44ae249cc5f06b45b39383d28ace69d, type: 3}
+  openCheatSheetSFX: {fileID: 8300000, guid: f4b9bda47de655d43b7825855446730a, type: 3}
+  closeCheatSheetSFX: {fileID: 8300000, guid: 4e2be0010d4d20b44bb1451adfa70b2e, type: 3}
   cheatSheet: {fileID: 0}
 --- !u!1 &5256150808419590806
 GameObject:

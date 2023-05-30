@@ -1,4 +1,6 @@
 using Com.oHMysTArs.Grid;
+using Com.oHMysTArs.Level;
+using Com.oHMysTArs.Tutorial;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,15 +17,38 @@ namespace Com.oHMysTArs.Input
         public event EventHandler<Point> OnStopHover;
         public event EventHandler<Point> OnSelect;
         private Point lastHovering;
+        private bool active = true;
+        private InputManager.RaycastLayer layer = InputManager.RaycastLayer.Game;
 
         private void Start()
         {
             inputManager = InputManager.Instance;
+            GameManager.Instance.LevelManager.OnFinish += (object sender, Level.Level level) => active = false;
+            TutorialManager tutorialManager = GameManager.Instance.TutorialManager;
+            if (tutorialManager != null)
+            {
+                tutorialManager.OnStart += (object sender, TutorialContent tutorial) => 
+                { 
+                    if (tutorial is DrawTutorial)
+                    {
+                        layer = InputManager.RaycastLayer.Focus;
+                    }
+                    active = !tutorial.DisableDrawing; 
+                };
+                tutorialManager.OnComplete += (object sender, TutorialContent tutorial) => 
+                { 
+                    if (tutorial is DrawTutorial)
+                    {
+                        layer = InputManager.RaycastLayer.Game;
+                    }
+                    active = true; 
+                };
+            }
         }
 
         public void Update()
         {
-            if (!TrySelectPoint(out Point point) || point.Active) 
+            if (!active || !TrySelectPoint(out Point point) || point.Active) 
             {
                 OnStopHover?.Invoke(this, lastHovering);
                 lastHovering = null;
@@ -44,7 +69,7 @@ namespace Com.oHMysTArs.Input
         private bool TrySelectPoint(out Point point)
         {
             point = null;
-            if (inputManager.TryGetHoverElement(false, out GameObject hoveringPoint))
+            if (inputManager.TryGetHoverElement(layer, out GameObject hoveringPoint))
             {
                 point = hoveringPoint.GetComponentInParent<Point>();
             }

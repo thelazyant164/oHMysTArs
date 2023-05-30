@@ -254,9 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 1
   fadeDuration: 1
-  succeedSFX: {fileID: 8300000, guid: 7a0e740b7b33dba4d8afebc6a2c13412, type: 3}
-  failSFX: {fileID: 8300000, guid: 15d286990a056f542870d2e20e87f39f, type: 3}
-  moveSFX: {fileID: 8300000, guid: 560999434f1a8f04ea7e29e489c3523d, type: 3}
+  succeedSFX: {fileID: 8300000, guid: 1db8d050a5cb76645bfd82317dcd5d19, type: 3}
+  failSFX: {fileID: 8300000, guid: 38302bf0a54439c498b9d79ed8ce0710, type: 3}
+  moveSFX: {fileID: 8300000, guid: be4581d5bb639f04f8f9e7d7bf07af38, type: 3}
   idleSFX: {fileID: 8300000, guid: f0ba022c6d0cd254dae6471b8b4596ac, type: 3}
 --- !u!95 &2431044814133046583
 Animator:

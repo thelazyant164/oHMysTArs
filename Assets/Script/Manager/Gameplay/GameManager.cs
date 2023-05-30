@@ -6,6 +6,7 @@ using Com.oHMysTArs.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.oHMysTArs.Tutorial;
 
 namespace Com.oHMysTArs
 {
@@ -16,6 +17,8 @@ namespace Com.oHMysTArs
         public DrawHistory DrawHistory { get; private set; }
         public LevelManager LevelManager { get; private set; }
         public FeedbackManager FeedbackManager { get; private set; }
+        public TutorialManager TutorialManager { get; private set; }
+        public bool InTutorialMode => TutorialManager != null && TutorialManager.isActiveAndEnabled;
         public SpaceshipManager SpaceshipManager { get; private set; }
 
         private void Awake()
@@ -30,6 +33,7 @@ namespace Com.oHMysTArs
             DrawHistory = GetComponentInChildren<DrawHistory>();
             LevelManager = GetComponentInChildren<LevelManager>();
             FeedbackManager = GetComponentInChildren<FeedbackManager>();
+            TutorialManager = levelName == "Tutorial" ? GetComponentInChildren<TutorialManager>() : null;
             SpaceshipManager = GetComponentInChildren<SpaceshipManager>();
         }
 
@@ -40,6 +44,20 @@ namespace Com.oHMysTArs
             UIManager.Instance.Timeline.Init();
             LevelManager.PlayLevel(levelName);
             LevelManager.OnFinish += ShowLevelAssessment;
+        }
+
+        public void TogglePause(bool pause)
+        {
+            if (pause)
+            {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
+            }
+            else
+            {
+                Time.timeScale = 1;
+                AudioListener.pause = false;
+            }
         }
 
         private void ShowLevelAssessment(object sender, Level.Level level)

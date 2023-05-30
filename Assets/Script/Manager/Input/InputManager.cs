@@ -11,10 +11,19 @@ namespace Com.oHMysTArs.Input
 {
     public sealed class InputManager : Singleton<InputManager>
     {
+        public enum RaycastLayer
+        {
+            Game = 0,
+            Focus = 1,
+            UI = 2
+        }
+
         [SerializeField]
         private GraphicRaycaster UIRaycaster;
         [SerializeField]
-        private GraphicRaycaster raycaster;
+        private GraphicRaycaster gameRaycaster;
+        [SerializeField]
+        private GraphicRaycaster focusRaycaster;
         public PointSelectionManager PointSelectionManager { get; private set; }
         public PointSelectionCache PointSelectionCache { get; private set; }
         public bool IsMouseDown { get; private set; }
@@ -57,13 +66,28 @@ namespace Com.oHMysTArs.Input
 
         public Vector2 GetMouseScreenPosition() => UnityEngine.Input.mousePosition;
 
-        public bool TryGetHoverElement(bool UI, out GameObject hovering)
+        public bool TryGetHoverElement(RaycastLayer layer, out GameObject hovering)
         {
             hovering = null;
             List<RaycastResult> result = new();
             PointerEventData pointer = new PointerEventData(EventSystem.current);
             pointer.position = GetMouseScreenPosition();
-            GraphicRaycaster raycaster = UI ? UIRaycaster : this.raycaster;
+            GraphicRaycaster raycaster;
+            switch (layer)
+            {
+                case RaycastLayer.Game:
+                    raycaster = gameRaycaster; 
+                    break;
+                case RaycastLayer.Focus: 
+                    raycaster = focusRaycaster; 
+                    break;
+                case RaycastLayer.UI: 
+                    raycaster = UIRaycaster; 
+                    break;
+                default: 
+                    Debug.LogError($"Unrecognized layer: {layer}");
+                    throw new Exception("Cannot try get hover element with invalid layer");
+            }
             raycaster.Raycast(pointer, result);
             if (result.Any()) hovering = result.First().gameObject;
             return hovering != null;

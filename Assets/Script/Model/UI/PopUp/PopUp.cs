@@ -9,7 +9,7 @@ namespace Com.oHMysTArs.UI
 {
     public abstract class PopUp : MonoBehaviour
     {
-        private void Start()
+        protected virtual void Start()
         {
             gameObject.SetActive(false);
         }

@@ -22,8 +22,6 @@ namespace Com.oHMysTArs.Grid
         [SerializeField]
         private bool active;
         public bool Active => active;
-        [SerializeField]
-        private bool hover = false;
         [Space]
 
         [Header("SFX")]
