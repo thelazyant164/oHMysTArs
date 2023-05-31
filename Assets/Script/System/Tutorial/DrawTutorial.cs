@@ -11,11 +11,10 @@ namespace Com.oHMysTArs.Tutorial
         private bool correct = false;
         public override bool Complete => correct;
 
-        protected override void Start()
+        private void Start()
         {
             DrawHistory history = GameManager.Instance.DrawHistory;
             history.OnDraw += (object sender, bool correct) => this.correct = correct;
-            base.Start();
         }
     }
 }

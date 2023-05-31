@@ -7,13 +7,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Com.oHMysTArs.Tutorial;
+using Com.oHMysTArs.Collectible;
 
 namespace Com.oHMysTArs
 {
     public sealed class GameManager : Singleton<GameManager>
     {
-        [SerializeField]
-        private string levelName;
+        private LevelSelected levelSelected;
         public DrawHistory DrawHistory { get; private set; }
         public LevelManager LevelManager { get; private set; }
         public FeedbackManager FeedbackManager { get; private set; }
@@ -30,10 +30,11 @@ namespace Com.oHMysTArs
             }
             Instance = this;
 
+            levelSelected = LevelSelected.Instance;
             DrawHistory = GetComponentInChildren<DrawHistory>();
             LevelManager = GetComponentInChildren<LevelManager>();
             FeedbackManager = GetComponentInChildren<FeedbackManager>();
-            TutorialManager = levelName == "Tutorial" ? GetComponentInChildren<TutorialManager>() : null;
+            TutorialManager = levelSelected.Selected == "1" ? GetComponentInChildren<TutorialManager>() : null;
             SpaceshipManager = GetComponentInChildren<SpaceshipManager>();
         }
 
@@ -42,7 +43,7 @@ namespace Com.oHMysTArs
             SpaceshipManager.Init();
             DrawHistory.Init();
             UIManager.Instance.Timeline.Init();
-            LevelManager.PlayLevel(levelName);
+            LevelManager.PlayLevel(levelSelected.Selected);
             LevelManager.OnFinish += ShowLevelAssessment;
         }
 
@@ -63,6 +64,11 @@ namespace Com.oHMysTArs
         private void ShowLevelAssessment(object sender, Level.Level level)
         {
             LevelAssessment assessment = new LevelAssessment(level.name, SpaceshipManager.Done);
+            new LevelResult(assessment.Name, assessment.OverallRating).Save();
+            foreach(Spaceship.Spaceship spaceship in SpaceshipManager.Done)
+            {
+                new SpaceshipCollectible(spaceship.Name).Save();
+            }
             FeedbackSO[] feedbacks = FeedbackManager.CreateFeedbacks(assessment);
             PopUpManager.Instance.ShowAssessment(assessment, feedbacks);
         }

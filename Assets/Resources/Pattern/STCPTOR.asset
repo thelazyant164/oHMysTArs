@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: STCPTOR
   m_EditorClassIdentifier: 
   Order:
-  - Column: 1
-    Row: 0
+  - Column: 2
+    Row: 4
+  - Column: 3
+    Row: 3
+  - Column: 3
+    Row: 2
+  - Column: 4
+    Row: 3
   - Column: 4
     Row: 4
-  - Column: 2
-    Row: 3
-  - Column: 1
-    Row: 1
-  - Column: 0
+  - Column: 3
     Row: 4
-  - Column: 2
-    Row: 1

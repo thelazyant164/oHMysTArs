@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Com.oHMysTArs.Level;
 
 namespace Com.oHMysTArs.UI
 {
@@ -34,6 +35,16 @@ namespace Com.oHMysTArs.UI
         [SerializeField]
         private Button proceedButton;
 
+        private LevelSelected selected;
+        private LevelManager levelManager;
+
+        protected override void Start()
+        {
+            selected = LevelSelected.Instance;
+            levelManager = GameManager.Instance.LevelManager;
+            base.Start();
+        }
+
         public void Show(
             LevelAssessment content,
             FeedbackSO[] feedbacks
@@ -51,8 +62,18 @@ namespace Com.oHMysTArs.UI
 
             backButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("MenuScene"));
             replayButton.onClick.AddListener(() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
-            // TODO: as there is only 1 level right now, "proceed" replays level - make levels progress in order
-            proceedButton.onClick.AddListener(() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex));
+            proceedButton.onClick.AddListener(() => 
+            {
+                if (levelManager.TryGetNextLevel(selected.Selected, out string nextLvl))
+                {
+                    selected.SelectLevel(nextLvl);
+                    SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex); 
+                }
+                else
+                {
+                    SceneManager.LoadSceneAsync("CreditScene");
+                }
+            });
             base.Show();
         }
 

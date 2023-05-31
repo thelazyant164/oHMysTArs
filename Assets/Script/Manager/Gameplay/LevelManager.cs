@@ -51,5 +51,12 @@ namespace Com.oHMysTArs.Level
             current = levels.Find(level => level.name == name);
             OnStart?.Invoke(this, current);
         }
+
+        public bool TryGetNextLevel(string current, out string next) 
+        {
+            Level nextLvl = levels.SkipWhile(x => x.name != current).Skip(1).FirstOrDefault();
+            next = nextLvl?.name;
+            return nextLvl != null;
+        }
     }
 }

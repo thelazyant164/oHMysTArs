@@ -71,7 +71,7 @@ namespace Com.oHMysTArs.Spaceship
             foreach (SpaceshipSO so in spaceships) 
             {
                 Spaceship newSpaceship = GameObject.Instantiate(spaceshipPrefab, queue.transform).GetComponent<Spaceship>();
-                newSpaceship.Init(so, queue.GetPosition(i));
+                newSpaceship.Init(so, queue.GetPosition(i), queue.GetScale(i));
                 waitingQueue.Add(newSpaceship);
                 i++;
             }

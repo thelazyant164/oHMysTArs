@@ -1,4 +1,5 @@
 using Com.oHMysTArs.Spaceship;
+using Com.oHMysTArs.UI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -37,10 +38,13 @@ namespace Com.oHMysTArs.Queue
         [SerializeField]
         private Transform lastInLine;
         private Vector2 offset => lastInLine.position - servingPosition.position;
+        private Vector3 scaleFactor => lastInLine.localScale - servingPosition.localScale;
         private SpaceshipManager spaceshipManager;
+        private Static staticFrit;
 
         private void Awake()
         {
+            staticFrit = GetComponentInChildren<Static>();
             flickerAudioSource = GetComponentInChildren<AudioSource>();
         }
 
@@ -52,6 +56,7 @@ namespace Com.oHMysTArs.Queue
             spaceshipManager.OnEndQueue += (object sender, EventArgs e) =>
             {
                 StopCoroutine(flickerEffect);
+                staticFrit.Stop();
                 flickerAudioSource.Stop();
                 plate.gameObject.SetActive(false);
                 scan.gameObject.SetActive(false);
@@ -68,15 +73,15 @@ namespace Com.oHMysTArs.Queue
                 float interval = UnityEngine.Random.Range(minInterval, maxInterval);
                 yield return new WaitForSeconds(interval);
 
-                // Fade out
+                // ToggleFadeInOut out
                 float duration = UnityEngine.Random.Range(minDuration, maxDuration);
-                StartCoroutine(scan.Fade(duration));
+                StartCoroutine(scan.ToggleFadeInOut(duration));
                 StartCoroutine(plate.Fade(duration));
                 yield return new WaitForSeconds(duration);
 
-                // Fade back in
+                // ToggleFadeInOut back in
                 flickerAudioSource.Play();
-                StartCoroutine(scan.Fade(duration));
+                StartCoroutine(scan.ToggleFadeInOut(duration));
                 StartCoroutine(plate.Fade(duration));
                 yield return new WaitForSeconds(duration);
                 flickerAudioSource.Stop();
@@ -100,7 +105,7 @@ namespace Com.oHMysTArs.Queue
             int order = 0;
             foreach (Spaceship.Spaceship waitingSpaceship in spaceshipManager.WaitingQueue)
             {
-                waitingSpaceship.MoveTo(GetPosition(order));
+                waitingSpaceship.MoveTo(GetPosition(order), GetScale(order));
                 order++;
             }
             plate.SetText(spaceship.Plate);
@@ -108,5 +113,7 @@ namespace Com.oHMysTArs.Queue
         }
 
         public Vector2 GetPosition(int order) => (Vector2)servingPosition.position + offset * order;
+
+        public Vector3 GetScale(int order) => servingPosition.localScale + scaleFactor * order;
     }
 }

@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b4615f4b6fa7ff4c9d9668178b3968b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 1
+  velocity: 10
   fadeDuration: 1
   succeedSFX: {fileID: 8300000, guid: 1db8d050a5cb76645bfd82317dcd5d19, type: 3}
   failSFX: {fileID: 8300000, guid: 38302bf0a54439c498b9d79ed8ce0710, type: 3}

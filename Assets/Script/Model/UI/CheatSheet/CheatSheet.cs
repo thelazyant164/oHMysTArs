@@ -26,6 +26,7 @@ namespace Com.oHMysTArs.UI
         public event EventHandler OnStopHover;
         private AudioSource audioSource;
         private bool active = true;
+        private InputManager.RaycastLayer layer = InputManager.RaycastLayer.UI;
 
         private void Awake() => cheatSheetTrigger = GetComponentInChildren<Image>();
 
@@ -40,8 +41,22 @@ namespace Com.oHMysTArs.UI
             TutorialManager tutorialManager = GameManager.Instance.TutorialManager;
             if (tutorialManager != null)
             {
-                tutorialManager.OnStart += (object sender, TutorialContent tutorial) => active = !tutorial.DisableCheatSheet;
-                tutorialManager.OnComplete += (object sender, TutorialContent tutorial) => active = true;
+                tutorialManager.OnStart += (object sender, TutorialContent tutorial) => 
+                {
+                    if (tutorial is DrawTutorial)
+                    {
+                        layer = InputManager.RaycastLayer.Focus;
+                    }
+                    active = !tutorial.DisableCheatSheet; 
+                };
+                tutorialManager.OnComplete += (object sender, TutorialContent tutorial) => 
+                {
+                    if (tutorial is DrawTutorial)
+                    {
+                        layer = InputManager.RaycastLayer.UI;
+                    }
+                    active = true; 
+                };
             }
         }
 
@@ -61,7 +76,7 @@ namespace Com.oHMysTArs.UI
         private bool TryHoverCheatSheet(out GameObject cheatSheet)
         {
             cheatSheet = null;
-            if (inputManager.TryGetHoverElement(InputManager.RaycastLayer.UI, out GameObject hovering))
+            if (inputManager.TryGetHoverElement(layer, out GameObject hovering))
             {
                 cheatSheet = hovering == cheatSheetTrigger.gameObject ? this.cheatSheet : null;
             }

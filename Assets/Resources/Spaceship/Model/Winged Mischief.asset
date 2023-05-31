@@ -16,3 +16,4 @@ MonoBehaviour:
   VIP: 1
   Texture: {fileID: 2800000, guid: 15501daca30fe2a47b01c343f016d938, type: 3}
   ScanTexture: {fileID: 2800000, guid: de24e992b647d554da5ae4fda9c7cea1, type: 3}
+  UnlockTexture: {fileID: 2800000, guid: 1efff5266026d8146b100684bcccf860, type: 3}

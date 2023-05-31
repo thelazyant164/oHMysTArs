@@ -11,10 +11,9 @@ namespace Com.oHMysTArs.Tutorial
         private GameObject cheatSheet;
         private Image cheatSheetGraphic;
 
-        protected override void Start()
+        private void Start()
         {
             cheatSheetGraphic = cheatSheet.GetComponentInChildren<Image>();
-            base.Start();
         }
 
         protected override bool CheckCondition() => cheatSheetGraphic.IsActive();

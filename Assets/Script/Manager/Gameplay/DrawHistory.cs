@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Com.oHMysTArs.Grid;
 using Com.oHMysTArs.Input;
 using Com.oHMysTArs.Spaceship;
@@ -44,6 +45,7 @@ namespace Com.oHMysTArs.Pattern
 
         private void RecordPattern(object sender, List<Point> points)
         {
+            if (current == null || !points.Any()) return;
             Pattern pattern = Pattern.Record(points);
             history.Add(GameObject.Instantiate(pattern));
             OnDraw?.Invoke(this, Pattern.Match(pattern, current.Pattern));

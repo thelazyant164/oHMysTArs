@@ -22,14 +22,14 @@ namespace Com.oHMysTArs.Level
             {
                 string[] fields = line.Split(",");
                 if (fields.Length == 0) break;
-                SpaceshipSO[] predefinedOrder = new SpaceshipSO[fields.Length - 1];
-                for (int i = 0; i < predefinedOrder.Length; i++) 
+                List<SpaceshipSO> predefinedOrder = new();
+                for (int i = 0; i < fields.Length - 1; i++) 
                 {
                     if (fields[i + 1] == "") break;
-                    predefinedOrder[i] = spaceships.Find(spaceship => spaceship.name == fields[i + 1]);
+                    predefinedOrder.Add(spaceships.Find(spaceship => spaceship.name == fields[i + 1]));
                 }
 
-                Level newLevel = Level.Init(fields[0], predefinedOrder);
+                Level newLevel = Level.Init(fields[0], predefinedOrder.ToArray());
                 items.Add(newLevel);
             }
             return items;

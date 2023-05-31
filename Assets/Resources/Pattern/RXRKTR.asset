@@ -13,25 +13,15 @@ MonoBehaviour:
   m_Name: RXRKTR
   m_EditorClassIdentifier: 
   Order:
-  - Column: 4
-    Row: 1
-  - Column: 3
-    Row: 0
   - Column: 2
-    Row: 0
-  - Column: 1
-    Row: 0
-  - Column: 1
-    Row: 1
+    Row: 3
   - Column: 1
     Row: 2
   - Column: 1
     Row: 3
-  - Column: 2
+  - Column: 0
     Row: 3
-  - Column: 2
-    Row: 4
-  - Column: 3
-    Row: 4
-  - Column: 4
-    Row: 0
+  - Column: 0
+    Row: 2
+  - Column: 1
+    Row: 1

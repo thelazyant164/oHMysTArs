@@ -11,12 +11,26 @@ namespace Com.oHMysTArs.UI
         [SerializeField]
         private Button playButton;
         [SerializeField]
+        private Button collectibleButton;
+        [SerializeField]
+        private Button creditButton;
+        [SerializeField]
         private Button quitButton;
+        [SerializeField]
+        private ParticleSystem stars;
 
         private void Awake()
         {
-            playButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("GameScene"));
+            playButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("LevelSelectionScene"));
+            collectibleButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("CollectibleScene"));
+            creditButton.onClick.AddListener(() => SceneManager.LoadSceneAsync("CreditScene"));
             quitButton.onClick.AddListener(() => Application.Quit());
+        }
+
+        private void Start()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(GetComponent<RectTransform>());
+            stars.Play();
         }
     }
 }

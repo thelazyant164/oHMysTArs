@@ -12,7 +12,9 @@ namespace Com.oHMysTArs.Spaceship
     {
         [Header("Movement")]
         [SerializeField]
-        private float velocity = 1;
+        private float moveSpeed = 1f;
+        [SerializeField]
+        private float scaleSpeed = 1f;
         [Space]
 
         [Header("Animation")]
@@ -36,6 +38,7 @@ namespace Com.oHMysTArs.Spaceship
         private SpaceshipManager spaceshipManager;
         private Animator animator;
         private Image image;
+        public string Name => data.name;
         public bool VIP => data.VIP;
         public Pattern.Pattern Pattern => data.Pattern;
         public int Attempts { get; private set; } = 0;
@@ -44,11 +47,12 @@ namespace Com.oHMysTArs.Spaceship
         public Texture2D ScanTexture => data.ScanTexture;
         public string Plate => data.Pattern.name;
 
-        public void Init(SpaceshipSO so, Vector2 position)
+        public void Init(SpaceshipSO so, Vector2 position, Vector3 scale)
         {
             data = so;
             image.SetTexture(so.Texture);
             transform.position = position;
+            transform.localScale = scale;
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             spaceshipManager.OnActiveSpaceshipChange += ProgressInQueue;
         }
@@ -65,6 +69,7 @@ namespace Com.oHMysTArs.Spaceship
 
         private IEnumerator MoveTowards(Vector2 target)
         {
+            float velocity = Vector2.Distance(transform.position, target) / moveSpeed;
             spaceshipAudio.Stop();
             spaceshipAudio.PlayOneShot(moveSFX);
             while (Vector2.Distance(transform.position, target) > Vector2.kEpsilon)
@@ -84,7 +89,11 @@ namespace Com.oHMysTArs.Spaceship
             spaceshipManager.OnActiveSpaceshipChange -= ProgressInQueue;
         }
 
-        public void MoveTo(Vector2 position) => StartCoroutine(MoveTowards(position));
+        public void MoveTo(Vector2 position, Vector3 scale) 
+        { 
+            StartCoroutine(MoveTowards(position));
+            StartCoroutine(gameObject.ScaleTo(scale, scaleSpeed));
+        }
 
         public void Draw(object sender, bool match)
         {
@@ -98,7 +107,7 @@ namespace Com.oHMysTArs.Spaceship
         {
             animator.enabled = true;
             animator.SetTrigger("Succeed");
-            StartCoroutine(image.Fade(fadeDuration));
+            StartCoroutine(image.ToggleFadeInOut(fadeDuration));
             spaceshipAudio.Stop();
             spaceshipAudio.PlayOneShot(succeedSFX);
         }
@@ -107,7 +116,7 @@ namespace Com.oHMysTArs.Spaceship
         {
             animator.enabled = true;
             animator.SetTrigger("Fail");
-            StartCoroutine(image.Fade(fadeDuration));
+            StartCoroutine(image.ToggleFadeInOut(fadeDuration));
             spaceshipAudio.Stop();
             spaceshipAudio.PlayOneShot(failSFX);
         }

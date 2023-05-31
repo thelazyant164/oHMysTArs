@@ -13,7 +13,7 @@ public static class IImageExtension
         source.sprite = Sprite.Create(newTex, new Rect(Vector2.zero, new Vector2(newTex.width, newTex.height)), new Vector2(.5f, .5f));
     }
 
-    public static IEnumerator Fade(this Image image, float duration)
+    public static IEnumerator ToggleFadeInOut(this Image image, float duration)
     {
         float elapsedTime = 0f;
         Color startColor = image.color;
@@ -42,5 +42,61 @@ public static class IImageExtension
         Canvas canvas = image.GetComponentInParent<Canvas>();
         canvas.overrideSorting = true;
         canvas.sortingLayerID = sortingLayerId;
+    }
+
+    public static IEnumerator FadeTo(this Image image, float targetOpacity, float fadeDuration)
+    {
+        Color startColor = image.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, targetOpacity);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            float t = elapsedTime / fadeDuration;
+            image.color = Color.Lerp(startColor, targetColor, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        image.color = targetColor;
+    }
+
+    public static IEnumerator Flash(this Image image, float startOpacity, float endOpacity, float interval, float duration)
+    {
+        while (true)
+        {
+            float elapsedTime = 0f;
+
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
+                float currentOpacity = Mathf.Lerp(startOpacity, endOpacity, t);
+
+                image.color = new Color(image.color.r, image.color.g, image.color.b, currentOpacity);
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            image.color = new Color(image.color.r, image.color.g, image.color.b, endOpacity);
+
+            yield return new WaitForSeconds(interval);
+
+            elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                float t = elapsedTime / duration;
+                float currentOpacity = Mathf.Lerp(endOpacity, startOpacity, t);
+
+                image.color = new Color(image.color.r, image.color.g, image.color.b, currentOpacity);
+
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            image.color = new Color(image.color.r, image.color.g, image.color.b, startOpacity);
+
+            yield return new WaitForSeconds(interval);
+        }
     }
 }

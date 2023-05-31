@@ -1,13 +1,10 @@
 using Com.oHMysTArs.Pattern;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Playables;
 using UnityEditor;
 using UnityEngine;
 using System.Reflection;
-using Com.oHMysTArs.Grid;
 using System.Linq;
-using static Com.oHMysTArs.Grid.GridSystem;
 using System.IO;
 
 namespace Com.oHMysTArs.Spaceship
@@ -17,6 +14,7 @@ namespace Com.oHMysTArs.Spaceship
         private readonly List<Pattern.Pattern> patterns = Resources.LoadAll<Pattern.Pattern>("Pattern").ToList();
         private readonly List<Texture2D> solidTextures = Resources.LoadAll<Texture2D>("Spaceship/Texture/Solid").ToList();
         private readonly List<Texture2D> scanTextures = Resources.LoadAll<Texture2D>("Spaceship/Texture/Scan").ToList();
+        private readonly List<Texture2D> unlockTextures = Resources.LoadAll<Texture2D>("Spaceship/Texture/Unlock").ToList();
 
         public SpaceshipLoader() : base("Spaceship/Model", "Spaceship_data.csv") { }
 
@@ -34,9 +32,10 @@ namespace Com.oHMysTArs.Spaceship
                 Pattern.Pattern pattern = patterns.Find(pattern => pattern.name == fields[1]);
                 Texture2D texture = solidTextures.Find(texture => texture.name == fields[0]);
                 Texture2D scanTexture = scanTextures.Find(texture => texture.name == $"{fields[0]}_scan_v2");
+                Texture2D unlockTexture = unlockTextures.Find(texture => texture.name == $"{fields[0]}_unlock");
                 SpaceshipSO newSpaceship = SpaceshipSO.Init(fields[0], pattern, 
                     DataParser.ParseInt(fields[2]) == 1, 
-                    texture, scanTexture);
+                    texture, scanTexture, unlockTexture);
                 items.Add(newSpaceship);
             }
             return items;

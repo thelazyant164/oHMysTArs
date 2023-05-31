@@ -32,16 +32,11 @@ namespace Com.oHMysTArs.Assessment
 
         public FeedbackSO[] CreateFeedbacks(LevelAssessment assessment)
         {
-            FeedbackSO[] feedbacks = new FeedbackSO[5];
+            FeedbackSO[] feedbacks = new FeedbackSO[3];
             feedbacks[0] = GetRandomFeedback(Type.Accuracy, assessment.Accuracy);
             feedbacks[1] = GetRandomFeedback(Type.Punctuality, assessment.Punctuality);
             feedbacks[2] = GetRandomFeedback(Type.Profitability, assessment.Profitability);
-            feedbacks[3] = GetRandomFeedback(Type.Efficiency, assessment.OverallRating);
-            while (true) 
-            {
-                feedbacks[4] = GetRandomFeedback(Type.Efficiency, assessment.OverallRating);
-                if (feedbacks[4].name != feedbacks[3].name) { break; }
-            }
+            feedbacks[Random.Range(0, 3)] = GetRandomFeedback(Type.Efficiency, assessment.OverallRating);
             return feedbacks;
         }
     }

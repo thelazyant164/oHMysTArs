@@ -35,9 +35,9 @@ namespace Com.oHMysTArs.Tutorial
 
         public abstract bool Complete { get; }
 
-        protected virtual void Start()
+        private void Awake()
         {
-            tutorialManager = GameManager.Instance.TutorialManager;
+            tutorialManager = GetComponentInParent<TutorialManager>();
             ignoreOriginalLayer = ignore.Select(gameObject => gameObject.transform.parent).ToList();
             focusOriginalLayer = focus.Select(gameObject => gameObject.transform.parent).ToList();
         }
