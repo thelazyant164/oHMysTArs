@@ -31,13 +31,18 @@ namespace Com.oHMysTArs.Spaceship
         private AudioClip moveSFX;
         [SerializeField]
         private AudioClip idleSFX;
+        [Space]
+
+        [Header("Graphic")]
+        [SerializeField]
+        private Image image;
 
         private AudioSource spaceshipAudio;
         private SpaceshipSO data;
         private QueueSystem state;
         private SpaceshipManager spaceshipManager;
         private Animator animator;
-        private Image image;
+
         public string Name => data.name;
         public bool VIP => data.VIP;
         public Pattern.Pattern Pattern => data.Pattern;
@@ -62,7 +67,6 @@ namespace Com.oHMysTArs.Spaceship
             spaceshipAudio = GetComponentInChildren<AudioSource>();
             state = GetComponentInChildren<QueueSystem>();
             state.SetState(new Waiting(state));
-            image = GetComponentInChildren<Image>();
             animator = GetComponentInChildren<Animator>();
             animator.enabled = false;
         }

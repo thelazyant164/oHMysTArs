@@ -14,6 +14,8 @@ namespace Com.oHMysTArs
     public sealed class GameManager : Singleton<GameManager>
     {
         private LevelSelected levelSelected;
+        [SerializeField]
+        private Queue.Queue queue;
         public DrawHistory DrawHistory { get; private set; }
         public LevelManager LevelManager { get; private set; }
         public FeedbackManager FeedbackManager { get; private set; }
@@ -43,6 +45,7 @@ namespace Com.oHMysTArs
             SpaceshipManager.Init();
             DrawHistory.Init();
             UIManager.Instance.Timeline.Init();
+            queue.Init();
             LevelManager.PlayLevel(levelSelected.Selected);
             LevelManager.OnFinish += ShowLevelAssessment;
         }

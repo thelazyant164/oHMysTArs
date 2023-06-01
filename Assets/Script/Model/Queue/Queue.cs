@@ -48,7 +48,7 @@ namespace Com.oHMysTArs.Queue
             flickerAudioSource = GetComponentInChildren<AudioSource>();
         }
 
-        private void Start()
+        public void Init()
         {
             spaceshipManager = GameManager.Instance.SpaceshipManager;
             spaceshipManager.OnDoneServing += SendAway;

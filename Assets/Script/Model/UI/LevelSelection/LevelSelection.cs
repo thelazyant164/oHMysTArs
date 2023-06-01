@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Com.oHMysTArs.Level
@@ -17,6 +18,7 @@ namespace Com.oHMysTArs.Level
 
         private void Awake()
         {
+            GetComponentInChildren<Button>().onClick.AddListener(() => SceneManager.LoadSceneAsync("MenuScene"));
             List<Level> staticLvlData = Resources.LoadAll<Level>("Level").ToList();
             List<LevelResult> playedLvlData = LevelResult.Load();
             List<Level> lockedLvls = staticLvlData.Where(lvl => !playedLvlData.Any(playedLvl => playedLvl.Name == lvl.name)).ToList();

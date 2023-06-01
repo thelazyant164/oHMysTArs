@@ -8,6 +8,7 @@ namespace Com.oHMysTArs.Queue
     public sealed class Serving : QueueState
     {
         private float remainingTime;
+        public float RemainingTime => remainingTime;
 
         public Serving(QueueSystem queueSystem) : base(queueSystem) 
         {

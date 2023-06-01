@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 namespace Com.oHMysTArs.Tutorial
@@ -24,6 +25,12 @@ namespace Com.oHMysTArs.Tutorial
         private List<TutorialContent> pendingTutorial;
         [SerializeField]
         private List<TutorialContent> completeTutorial;
+        [Space]
+
+        [Header("Tutorial complete SFX")]
+        [SerializeField]
+        private UnityEvent tutorialPassCallback;
+
         private TutorialContent Current => pendingTutorial.FirstOrDefault();
         public event EventHandler<TutorialContent> OnStart;
         public event EventHandler<TutorialContent> OnComplete;
@@ -55,6 +62,7 @@ namespace Com.oHMysTArs.Tutorial
 
         private void EndTutorial(object sender, TutorialContent tutorial)
         {
+            tutorialPassCallback?.Invoke();
             pendingTutorial.Remove(tutorial);
             completeTutorial.Add(tutorial);
             GameManager.Instance.TogglePause(false);

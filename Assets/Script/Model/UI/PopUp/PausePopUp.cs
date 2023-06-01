@@ -23,9 +23,11 @@ namespace Com.oHMysTArs.UI
                 if (!GameManager.Instance.InTutorialMode) GameManager.Instance.TogglePause(false);
                 Hide(); 
             });
-            menuButton.onClick.AddListener(() => 
-                PopUpManager.Instance.ShowConfirm("PROGRESS WILL BE LOST", 
-                    () => SceneManager.LoadSceneAsync("MenuScene")));
+            menuButton.onClick.AddListener(() => PopUpManager.Instance.ShowConfirm("PROGRESS WILL BE LOST", () => 
+            { 
+                GameManager.Instance.TogglePause(false);
+                SceneManager.LoadSceneAsync("MenuScene"); 
+            }));
         }
     }
 }
