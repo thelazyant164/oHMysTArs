@@ -8,7 +8,6 @@ namespace Com.oHMysTArs.Grid
     public sealed class Line : MonoBehaviour
     {
         private Vector3 start;
-        private Vector3 end;
         private LineRenderer lineRenderer;
         private InputManager input;
         private bool dynamic = false;
@@ -17,11 +16,6 @@ namespace Com.oHMysTArs.Grid
         {
             lineRenderer = GetComponentInChildren<LineRenderer>();
             lineRenderer.positionCount = 2;
-        }
-
-        private void Start()
-        {
-            input = InputManager.Instance;
         }
 
         private void Update()
@@ -33,7 +27,6 @@ namespace Com.oHMysTArs.Grid
         public void Setup(Vector3 start, Vector3 end)
         {
             this.start = start;
-            this.end = end;
             lineRenderer.SetPositions(new Vector3[]
             {
                 new Vector3(start.x, start.y),
@@ -43,8 +36,9 @@ namespace Com.oHMysTArs.Grid
 
         public void Attach(Vector3 start) 
         { 
-            this.start = start;
             dynamic = true;
+            input = InputManager.Instance;
+            Setup(start, input.GetMouseWorldPosition());
         }
     }
 }

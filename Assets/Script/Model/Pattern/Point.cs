@@ -34,12 +34,14 @@ namespace Com.oHMysTArs.Grid
 
         public Coordinate Coordinate { get; private set; }
         private Image image;
+        private ParticleSystem twinkle;
         private InputManager inputManager;
         private PointSelectionManager selectionManager;
 
         private void Awake()
         {
             image = GetComponentInChildren<Image>();
+            twinkle = GetComponentInChildren<ParticleSystem>();
         }
 
         private void Start()
@@ -73,6 +75,7 @@ namespace Com.oHMysTArs.Grid
         {
             UIManager.Instance.UIAudio.PlayOneShot(twinkleSelect, .25f);
             active = true;
+            twinkle.Play();
             Select();
         }
 

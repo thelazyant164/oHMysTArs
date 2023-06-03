@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d18409e5210914caebf40470e32eda, type: 3}
   m_Name: Cosmic Chuckler
   m_EditorClassIdentifier: 
-  Pattern: {fileID: 11400000, guid: 6aa2564144ae2c340b56220d00effcb5, type: 2}
+  Pattern: {fileID: 11400000, guid: a6da5dbff4d4a454389c7ba93fcaea02, type: 2}
   VIP: 0
   Texture: {fileID: 2800000, guid: ccae71016e4172548a4fc9f59fa63eaa, type: 3}
   ScanTexture: {fileID: 2800000, guid: 3edb1b83d3f4e244d9517211d2c26bea, type: 3}

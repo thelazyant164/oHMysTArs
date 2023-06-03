@@ -9,11 +9,25 @@ namespace Com.oHMysTArs.Tutorial
     {
         [SerializeField]
         private GameObject cheatSheet;
+        [SerializeField]
+        private ParticleSystem emphasis;
         private Image cheatSheetGraphic;
 
         private void Start()
         {
             cheatSheetGraphic = cheatSheet.GetComponentInChildren<Image>();
+        }
+
+        public override void Play()
+        {
+            base.Play();
+            emphasis.Play();
+        }
+
+        public override void Close()
+        {
+            base.Close();
+            emphasis.Stop();
         }
 
         protected override bool CheckCondition() => cheatSheetGraphic.IsActive();

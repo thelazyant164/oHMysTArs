@@ -40,6 +40,7 @@ namespace Com.oHMysTArs.Spaceship
         private AudioSource spaceshipAudio;
         private SpaceshipSO data;
         private QueueSystem state;
+        private ParticleSystem movementVFX;
         private SpaceshipManager spaceshipManager;
         private Animator animator;
 
@@ -69,6 +70,7 @@ namespace Com.oHMysTArs.Spaceship
             state.SetState(new Waiting(state));
             animator = GetComponentInChildren<Animator>();
             animator.enabled = false;
+            movementVFX = GetComponentInChildren<ParticleSystem>();
         }
 
         private IEnumerator MoveTowards(Vector2 target)
@@ -109,9 +111,11 @@ namespace Com.oHMysTArs.Spaceship
 
         public void PlaySucceed()
         {
+
             animator.enabled = true;
             animator.SetTrigger("Succeed");
             StartCoroutine(image.ToggleFadeInOut(fadeDuration));
+            StartCoroutine(PlayVFX(movementVFX, .1f, fadeDuration - .1f));
             spaceshipAudio.Stop();
             spaceshipAudio.PlayOneShot(succeedSFX);
         }
@@ -121,6 +125,7 @@ namespace Com.oHMysTArs.Spaceship
             animator.enabled = true;
             animator.SetTrigger("Fail");
             StartCoroutine(image.ToggleFadeInOut(fadeDuration));
+            StartCoroutine(PlayVFX(movementVFX, .1f, fadeDuration - .1f));
             spaceshipAudio.Stop();
             spaceshipAudio.PlayOneShot(failSFX);
         }
@@ -129,6 +134,14 @@ namespace Com.oHMysTArs.Spaceship
         { 
             state.SetState(new Waiting(state)); 
             ServeTime = 0;
+        }
+
+        private IEnumerator PlayVFX(ParticleSystem vfx, float delay, float duration)
+        {
+            yield return new WaitForSeconds(delay);
+            movementVFX.Play();
+            yield return new WaitForSeconds(duration);
+            movementVFX.gameObject.SetActive(false);
         }
     }
 }

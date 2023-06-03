@@ -162,27 +162,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
-      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
-      propertyPath: m_SizeDelta.y
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6693656059547915940, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -25
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6697879717265274831, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -210,8 +210,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7692985418867947748, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_text
-      value: There is a time limit. Try to send as many aliens home as you can before
-        the day ends!
+      value: There is an overall time limit. Try to send as many aliens home as you
+        can before the day ends!
       objectReference: {fileID: 0}
     - target: {fileID: 8466405527972059218, guid: 23482f6b1f9a6fb4b961392e97aece8b, type: 3}
       propertyPath: m_Name

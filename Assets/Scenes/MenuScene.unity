@@ -1103,7 +1103,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6489557895726103177, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
       propertyPath: m_Name
-      value: Star system for bg
+      value: menu_star_twinkle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
       propertyPath: m_RootOrder
@@ -1155,7 +1163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1196,18 +1204,6 @@ PrefabInstance:
     - target: {fileID: 6489557895726103180, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489557895726103183, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
-      propertyPath: ShapeModule.m_Scale.x
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489557895726103183, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
-      propertyPath: ShapeModule.m_Scale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6489557895726103183, guid: 7733e30ab4021f646b5da5386ab2d032, type: 3}
-      propertyPath: ShapeModule.m_Scale.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -19,6 +19,7 @@ namespace Com.oHMysTArs.UI
 
         [SerializeField]
         private GameObject cheatSheet;
+        private ParticleSystem emphasis;
         private Image cheatSheetGraphic;
         private Image cheatSheetTrigger;
         private InputManager inputManager;
@@ -28,7 +29,11 @@ namespace Com.oHMysTArs.UI
         private bool active = true;
         private InputManager.RaycastLayer layer = InputManager.RaycastLayer.UI;
 
-        private void Awake() => cheatSheetTrigger = GetComponentInChildren<Image>();
+        private void Awake() 
+        { 
+            cheatSheetTrigger = GetComponentInChildren<Image>();
+            emphasis = GetComponentInChildren<ParticleSystem>();
+        }
 
         private void Start()
         {
