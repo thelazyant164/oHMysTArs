@@ -144,7 +144,3 @@ Generated levels will be saved under [Assets/Resources/Level](Assets/Resources/L
 - **Lachlan Haines** - _Asset artist, sound designer, content designer_
 - **Meng Yu Lim** - _Lead artist_ - [Powort](https://powort.carrd.co/)
 - **Wendy Nguyen** - _Lead tester, content writer, UI/UX designer, presenter_
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
